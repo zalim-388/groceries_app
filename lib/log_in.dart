@@ -9,12 +9,12 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogInState extends State<LogIn> {
-  bool passwordvisible = false;
+  bool passwordVisible = false;
 
   @override
-  void inistate() {
+  void initState() {
     super.initState();
-    passwordvisible = false;
+    passwordVisible = true;
   }
 
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class _LogInState extends State<LogIn> {
                       shape: BoxShape.rectangle),
                 ),
                 SizedBox(
-                  height: 80,
+                  height: 130,
                 ),
                 Align(
                   alignment: Alignment.centerLeft,
@@ -67,20 +67,23 @@ class _LogInState extends State<LogIn> {
                   height: 40,
                 ),
                 TextField(
+                  obscureText: passwordVisible,
                   decoration: InputDecoration(
                     labelText: 'Password',
                     labelStyle: TextStyle(color: Colors.grey, fontSize: 25),
                     suffixIcon: IconButton(
                         onPressed: () {
                           setState(() {
-                            passwordvisible = !passwordvisible;
+                            passwordVisible = !passwordVisible;
                           });
                         },
-                        icon: Icon(passwordvisible
+                        icon: Icon(passwordVisible
                             ? Icons.visibility_off_outlined
-                            : Icons.visibility_off_outlined)),
+                            : Icons.visibility)),
+                    suffixIconColor: Colors.grey,
+                    alignLabelWithHint: false,
                     filled: true,
-                    fillColor: Colors.white,
+                    fillColor: Colors.white10,
                   ),
                   keyboardType: TextInputType.visiblePassword,
                   textInputAction: TextInputAction.done,
@@ -98,7 +101,7 @@ class _LogInState extends State<LogIn> {
                       )),
                 ),
                 SizedBox(
-                  height: 90,
+                  height: 40,
                 ),
                 Container(
                   height: 70,
@@ -112,26 +115,27 @@ class _LogInState extends State<LogIn> {
                     style: TextStyle(color: Colors.white, fontSize: 15),
                   ),
                 ),
-                SizedBox(width: 40,),
-                Row(
-                  children: [
-
-                    Text(
-                      'Don’t have an account?',
-                      style: TextStyle(fontSize: 15),
-                    ),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => singup()));
-                        },
-                        child: Text(
-                          'Singup',
-                          style: TextStyle(color: Colors.green, fontSize: 15),
-                        ))
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(left: 100),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Don’t have an account?',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => singup()));
+                          },
+                          child: Text(
+                            'Singup',
+                            style: TextStyle(color: Colors.green, fontSize: 15),
+                          ))
+                    ],
+                  ),
                 )
               ],
             ),

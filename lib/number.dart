@@ -13,86 +13,96 @@ class _NumberState extends State<Number> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                Icons.arrow_back_ios_outlined,
-                size: 30,
-              )),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 50),
-            child: SingleChildScrollView(
+      appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back_ios_outlined,
+              size: 30,
+            )),
+      ),
+      body: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 30),
               child: Column(
                 children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Enter your moblie number',
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'moblie number',
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 20,
-                        ),
-                      )),
-                  Container(
-                    child: Column(
-                      children: [
-                        IntlPhoneField(
-                          onTap: () {},
-                          decoration: InputDecoration(
-                            border: UnderlineInputBorder(),
-                          ),
-                          initialCountryCode: 'IN',
-                          onChanged: (phone) {
-                            print(phone.completeNumber);
-                          },
-                        ),
-                        SizedBox(
-                          height: 250,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 300),
-                          child: CircleAvatar(
-                            backgroundColor: Colors.green,
-                            radius: 30,
-                            child: IconButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => Verification(),
-                                      ));
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                'Enter your moblie number',
+                                style: TextStyle(
+                                    fontSize: 30, fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                            SizedBox(height: 20),
+                            Container(
+                                child: Column(children: [
+                              IntlPhoneField(
+                                onTap: () {},
+                                decoration: InputDecoration(
+                                  labelText: 'moblie number',
+                                  labelStyle: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 20,
+                                  ),
+                                  border: UnderlineInputBorder(),
+                                ),
+                                initialCountryCode: 'IN',
+                                onChanged: (phone) {
+                                  print(phone.completeNumber);
                                 },
-                                icon: Icon(
-                                  Icons.arrow_forward_ios_outlined,
-                                  color: Colors.white,
-                                  size: 30,
-                                )),
-                          ),
-                        )
-                      ],
+                              ),
+                            ])),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
           ),
-        ));
+          Positioned(
+            bottom: MediaQuery.of(context).viewInsets.top + 30,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 20,
+                  ),
+                  SizedBox(
+                    width: 300,
+                  ),
+                  FloatingActionButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Verification(),));
+                    },
+                    child: Icon(
+                      Icons.arrow_forward_ios_outlined,
+                      color: Colors.white,
+                    ),
+                    backgroundColor: Colors.green,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

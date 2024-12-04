@@ -50,7 +50,7 @@ class _SelectLocationState extends State<SelectLocation> {
                   style: TextStyle(color: Colors.grey, fontSize: 16),
                 ),
                 SizedBox(
-                  height: 60,
+                  height: 80,
                 ),
                 TextField(
                   decoration: InputDecoration(
@@ -85,7 +85,7 @@ class _SelectLocationState extends State<SelectLocation> {
                           ))),
                 ),
                 SizedBox(
-                  height: 90,
+                  height: 70,
                 ),
                 GestureDetector(
                   onTap: () {
