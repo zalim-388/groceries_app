@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:groceries_app/bottom_bar.dart';
 
-class singup extends StatefulWidget {
-  const singup({super.key});
+class signup extends StatefulWidget {
+  const signup({super.key});
 
   @override
-  State<singup> createState() => _singupState();
+  State<signup> createState() => _signupState();
 }
 
-class _singupState extends State<singup> {
+class _signupState extends State<signup> {
   bool PasswordVisible = false;
 
   @override
@@ -23,7 +24,7 @@ class _singupState extends State<singup> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
         child: Padding(
-          padding: const EdgeInsets.only(top: 80),
+          padding: const EdgeInsets.only(top: 100),
           child: Column(
             children: [
               Container(
@@ -36,7 +37,7 @@ class _singupState extends State<singup> {
                     shape: BoxShape.rectangle),
               ),
               SizedBox(
-                height: 70,
+                height: 100,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +56,7 @@ class _singupState extends State<singup> {
                     textAlign: TextAlign.left,
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 40,
                   ),
                   TextField(
                     decoration: InputDecoration(
@@ -64,7 +65,7 @@ class _singupState extends State<singup> {
                             TextStyle(color: Colors.grey, fontSize: 17)),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 40,
                   ),
                   FormField<String>(
                       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -107,7 +108,7 @@ class _singupState extends State<singup> {
                         );
                       }),
                   SizedBox(
-                    height: 30,
+                    height: 40,
                   ),
                   TextField(
                     decoration: InputDecoration(
@@ -130,7 +131,7 @@ class _singupState extends State<singup> {
                     keyboardType: TextInputType.visiblePassword,
                     textInputAction: TextInputAction.done,
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 15),
                   RichText(
                     text: TextSpan(
                       text: 'By continuing you agree to our ',
@@ -152,33 +153,44 @@ class _singupState extends State<singup> {
                     ),
                   ),
                   SizedBox(
-                    height: 40,
-                  ),
-                  Container(
                     height: 60,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.green),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Singurp',
-                      style: TextStyle(color: Colors.white),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MyHomePage(title: '')));
+                    },
+                    child: Container(
+                      height: 70,
+                      width: 370,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.green),
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Signup',
+                        style: TextStyle(color: Colors.white, fontSize: 19),
+                      ),
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 15,
                   ),
-                  RichText(
-                    text: TextSpan(
-                        text: 'Already have an account?',
-                        style: TextStyle(fontSize: 15),
-                        children: [
-                          TextSpan(
-                              text: 'Signup',
-                              style:
-                                  TextStyle(color: Colors.green, fontSize: 15))
-                        ]),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 70),
+                    child: RichText(
+                      text: TextSpan(
+                          text: 'Already have an account?',
+                          style: TextStyle(fontSize: 15, color: Colors.black),
+                          children: [
+                            TextSpan(
+                                text: 'Signup',
+                                style: TextStyle(
+                                    color: Colors.green, fontSize: 15))
+                          ]),
+                    ),
                   ),
                 ],
               ),

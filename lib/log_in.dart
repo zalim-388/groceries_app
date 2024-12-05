@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:groceries_app/Singup.dart';
+import 'package:groceries_app/Signup.dart';
+
 
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
@@ -128,7 +129,7 @@ class _LogInState extends State<LogIn> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => singup()));
+                                    builder: (context) => signup()));
                           },
                           child: Text(
                             'Singup',
