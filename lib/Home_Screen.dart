@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,15 +17,35 @@ class _HomeScreenState extends State<HomeScreen> {
   // ];
 
   // List<String> text = ['organic banana', 'Red Apple', 'orange', 'Mango'];
-  // List<String> TExt = [
-  //   '7pcs, Priceg',
-  //   '1kg, Priceg',
-  //   '2kg, Priceg',
-  //   '1kg, Priceg'
-  // ];
+  List<String> TExt = [
+    '7pcs, Priceg',
+    '1kg, Priceg',
+    '2kg, Priceg',
+    '1kg, Priceg'
+  ];
+  final CarouselSliderController _controller = CarouselSliderController();
+  int _current = 4;
+
+  final List<String> imgList = [
+    'https://www.shutterstock.com/image-vector/farm-fresh-produce-delivery-home-260nw-2154869859.jpg'
+        'https://freshfarmse.com/wp-content/uploads/2023/11/WhatsApp-Image-2023-11-09-at-1.51.07-AM.jpeg',
+    'https://www.spencers.in/media/catalog/category/FNV_deatils.jpg',
+    'https://i0.wp.com/kjfoods.co.in/wp-content/uploads/2022/03/1592574403-veg_web.jpg?fit=595%2C197&ssl=1',
+    'https://i.pinimg.com/474x/b4/70/d0/b470d0e41336aa7a70e20f676e93be5e.jpg',
+    'https://i0.wp.com/kjfoods.co.in/wp-content/uploads/2022/03/1628671638-fsfhjllz_vegetables-banner.jpg?fit=595%2C171&ssl=1'
+  ];
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> imageSliders = imgList
+        .map((item) => Container(
+              child: Container(
+                child: Image.network(
+                  item,
+                ),
+              ),
+            ))
+        .toList();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -72,8 +93,25 @@ class _HomeScreenState extends State<HomeScreen> {
                   filled: true,
                 ),
               ),
-//image
-
+              SizedBox(
+                height: 200,
+                width: 368,
+                child: Expanded(
+                  child: CarouselSlider(
+                    items: imageSliders,
+                    carouselController: _controller,
+                    options: CarouselOptions(
+                        autoPlay: true,
+                        enlargeCenterPage: true,
+                        aspectRatio: 1.0,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            _current = index;
+                          });
+                        }),
+                  ),
+                ),
+              ),
               Row(
                 children: [
                   Align(
@@ -92,6 +130,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: TextStyle(color: Colors.green, fontSize: 17),
                       ))
                 ],
+              ),
+              SizedBox(height: 200,
+                child: Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                      itemCount: TExt.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(color: Colors.black,height: 20,width: 100,
+                          child: Text(TExt[index],style: TextStyle(color: Colors.white,fontSize: 30),),
+                        );
+                      }),
+                ),
               ),
             ],
           ),
