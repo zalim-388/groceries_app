@@ -28,6 +28,7 @@ class _ExploreState extends State<Explore> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
         body: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25),
       child: Padding(
