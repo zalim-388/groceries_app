@@ -10,42 +10,43 @@ class Beverages extends StatefulWidget {
 class _BeveragesState extends State<Beverages> {
   final List<Map<String, String>> Beverage = [
     {
-      "image": "assets/image/pngwing.com (2).png",
+      "image": "assets/image/pngfuel 11.png",
       "name": "Diet Coke",
       "price": "355ml, Price"
     },
     {
-      "image": "assets/image/pngfuel_12.png",
+      "image": "assets/image/pngfuel 12.png",
       "name": "Sprite Can",
       "price": "325ml, Price"
     },
     {
-      "image": "assets/image/tree-top-juice-apple-grape-64oz_1.png",
-      "name": "Apple & Grape Juice",
+      "image":
+          "assets/image/toppng.com-sting-energy-drink-cambodia-297x1150.png",
+      "name": "Sting",
+      "price": "250ML, Price"
+    },
+    {
+      "image": "assets/image/pngegg (10).png",
+      "name": "mirinda",
       "price": "2L, Price"
     },
     {
-      "image": "assets/image/tree-top-juice-apple-grape-64oz_1_1.png",
-      "name": "Orange Juice",
-      "price": "2L, Price"
-    },
-    {
-      "image": "assets/image/pngfuel_13.png",
-      "name": "Coca Cola Can",
+      "image": "assets/image/pngfuel 13.png",
+      "name": "Coca Cola",
       "price": "325ml, Price"
     },
     {
-      "name": "Pepsi Can",
-      "image": "assets/image/pngfuel_14.png",
+      "image": "assets/image/pngegg (9).png",
+      "name": "Pepsi",
       "price": "330ml, Price"
     },
     {
-      "image": "assets/image/pngegg_7.png",
+      "image": "assets/image/pngegg (7).png",
       "name": "7up",
       "price": "250ml, Price"
     },
     {
-      "image": "assets/image/pngegg_8.png",
+      "image": "assets/image/pngegg (8).png",
       "name": "Fanta",
       "price": "200ml, Price"
     }
@@ -82,63 +83,52 @@ class _BeveragesState extends State<Beverages> {
         ],
       ),
       body: Expanded(
-        child:GridView.builder(
-  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-    crossAxisCount: 2,
-    crossAxisSpacing: 15,
-    mainAxisSpacing: 15,
-    childAspectRatio: 0.8,
-  ),
-  itemCount: Beverage.length,
-  itemBuilder: (context, index) {
-    final beverage = Beverage[index];
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.grey.shade300),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // Check if image is null
-            beverage["image"] != null
-                ? Image.asset(
-                    beverage["image"]!,
-                    height: 100,
-                    width: 100,
-                    fit: BoxFit.cover,
-                  )
-                : Text(
-                    'No data',
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-            SizedBox(height: 10),
-            Text(
-              beverage["name"]!,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-            Text(
-              beverage["price"]!,
-              style: TextStyle(color: Colors.grey, fontSize: 14),
-              textAlign: TextAlign.center,
-            ),
-          ],
+          child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 15,
+          mainAxisSpacing: 15,
+          childAspectRatio: 0.8,
         ),
-      ),
-    );
-  },
-)
-
-      ),
+        itemCount: Beverage.length,
+        itemBuilder: (context, index) {
+          final beverage = Beverage[index];
+          return Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: Colors.grey.shade300),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    beverage["image"]!,
+                    height: 80,
+                    width: 80,
+                    fit: BoxFit.cover,
+                  ),
+                  Column(crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        beverage["name"]!,
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        beverage["price"]!,
+                        style: TextStyle(color: Colors.grey, fontSize: 14),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      )),
     );
   }
 }
