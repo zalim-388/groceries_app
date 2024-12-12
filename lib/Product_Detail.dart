@@ -155,7 +155,7 @@ class _ProductDetailState extends State<ProductDetail> {
                       IconButton(
                           onPressed: () {
                             setState(() {
-                              if(quantity> 1) quantity--;
+                              if (quantity > 1) quantity--;
                             });
                           },
                           icon: Icon(

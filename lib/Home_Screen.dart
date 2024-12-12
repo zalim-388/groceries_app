@@ -452,7 +452,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 220,
+                  height: 240,
                   child: Expanded(
                     child: ListView.builder(
                       itemCount: meat.length,
@@ -493,15 +493,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ],
                                     ),
                                   ),
+                                  SizedBox(height: 15,),
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 20),
+                                    padding: const EdgeInsets.only(left: 30),
                                     child: Row(
                                       children: [
                                         Text(
                                           meatPrice[index],
                                           style: TextStyle(fontSize: 20),
                                         ),
-                                        SizedBox(width: 40,),
+                                        SizedBox(width: 50,),
                                         Container(
                                           height: 40,
                                           width: 40,
