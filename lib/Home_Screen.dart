@@ -452,7 +452,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 240,
+                  height: 220,
                   child: Expanded(
                     child: ListView.builder(
                       itemCount: meat.length,
