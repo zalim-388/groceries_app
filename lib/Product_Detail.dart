@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetail extends StatefulWidget {
@@ -20,9 +21,21 @@ class ProductDetail extends StatefulWidget {
 }
 
 class _ProductDetailState extends State<ProductDetail> {
-  int mycount = 0;
+  final CarouselSliderController _controller = CarouselSliderController();
+  int _current = 2;
+
   @override
   Widget build(BuildContext context) {
+    // final List<Widget> imageSliders =widget.image
+    //   .map((item) => Container(
+    //         child: Container(
+    //           child: Image.asset(
+    //             item,
+    //           ),
+    //         ),
+    //       ))
+    //   .toList();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey.shade200,
@@ -57,14 +70,26 @@ class _ProductDetailState extends State<ProductDetail> {
                   bottomRight: Radius.circular(30)),
               color: Colors.grey.shade200,
             ),
-            child: Container(
-              height: 350,
-              width: 300,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(widget.image), fit: BoxFit.contain),
-                  shape: BoxShape.rectangle),
-            ),
+            // child: Container(
+            //   height: 200,
+            //   width: double.infinity,
+            //   child: Expanded(
+            //     child: CarouselSlider(
+            //       items: imageSliders,
+            //       carouselController: _controller,
+            //       options: CarouselOptions(
+            //         autoPlay: true,
+            //         enlargeCenterPage: true,
+            //         aspectRatio: 1.0,
+            //         onPageChanged: (index, reason) {
+            //           setState(() {
+            //             _current = index;
+            //           });
+            //         },
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ),
           SizedBox(
             height: 20,

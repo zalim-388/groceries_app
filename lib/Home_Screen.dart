@@ -10,7 +10,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<String> imagList = [
+  List<String> image = [
     'assets/image/pngwing.com (1).png',
     'assets/image/pngfuel 1.png',
     'assets/image/pngegg.png',
@@ -32,8 +32,10 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   List<String> Price = ['\$4.59', '\$4.69', '\$6.99', '\$9.99'];
 
-  List<String> Apple=['assets/image/pngwing.com (3).png',
-  'assets/image/pngwing.com (2).png'];
+  List<String> Apple = [
+    'assets/image/pngwing.com (3).png',
+    'assets/image/pngwing.com (2).png'
+  ];
 
   List<String> vegetables = [
     'assets/image/92f1ea7dcce3b5d06cd1b1418f9b9413 3.png',
@@ -45,12 +47,11 @@ class _HomeScreenState extends State<HomeScreen> {
   List<String> vegPrice = ['\$7.99', '\$4.99', '\$2.99', '\$4.99'];
 
   final CarouselSliderController _controller = CarouselSliderController();
-  int _current = 4;
+  int _current = 3;
 
   final List<String> imgList = [
     'https://www.shutterstock.com/image-vector/farm-fresh-produce-delivery-home-260nw-2154869859.jpg'
         'https://freshfarmse.com/wp-content/uploads/2023/11/WhatsApp-Image-2023-11-09-at-1.51.07-AM.jpeg',
-    'https://www.spencers.in/media/catalog/category/FNV_deatils.jpg',
     'https://i0.wp.com/kjfoods.co.in/wp-content/uploads/2022/03/1592574403-veg_web.jpg?fit=595%2C197&ssl=1',
     'https://i.pinimg.com/474x/b4/70/d0/b470d0e41336aa7a70e20f676e93be5e.jpg',
     'https://i0.wp.com/kjfoods.co.in/wp-content/uploads/2022/03/1628671638-fsfhjllz_vegetables-banner.jpg?fit=595%2C171&ssl=1'
@@ -176,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => ProductDetail(
-                                          image: imagList[index],
+                                          image: image[index],
                                           price: Price[index],
                                           text: text[index],
                                           TExt: TExt[index],
@@ -194,7 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Column(
                                     children: [
                                       Image.asset(
-                                        imagList[index],
+                                        image[index],
                                         height: 80,
                                         width: 80,
                                       ),
