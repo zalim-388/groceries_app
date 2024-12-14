@@ -15,6 +15,7 @@ dependencies:
   intl_phone_field: ^3.2.0
   bottom_bar_matu: ^1.5.0 # Add the appropriate version here
   carousel_slider: ^5.0.0
+  dots_indicator: ^3.0.0
 
 dev_dependencies:
   flutter_test:

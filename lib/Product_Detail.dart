@@ -5,16 +5,17 @@ class ProductDetail extends StatefulWidget {
   final String image;
   final String price;
   final String Description;
-  final String text;
-  final String TExt;
+  final String title;
+  final String subtitle;
 
-  const ProductDetail(
-      {super.key,
-      required this.image,
-      required this.price,
-      required this.Description,
-      required this.text,
-      required this.TExt});
+  const ProductDetail({
+    super.key,
+    required this.image,
+    required this.price,
+    required this.Description,
+    required this.title,
+    required this.subtitle,
+  });
 
   @override
   State<ProductDetail> createState() => _ProductDetailState();
@@ -105,13 +106,13 @@ class _ProductDetailState extends State<ProductDetail> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          widget.text,
+                          widget.title,
                           style: TextStyle(fontSize: 30),
                         ),
                         Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              widget.TExt,
+                              widget.subtitle,
                               style:
                                   TextStyle(color: Colors.grey, fontSize: 20),
                             )),

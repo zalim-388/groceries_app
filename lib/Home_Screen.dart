@@ -17,13 +17,8 @@ class _HomeScreenState extends State<HomeScreen> {
     'assets/image/pngegg (3).png',
   ];
 
-  List<String> text = ['organic banana', 'Red Apple', 'orange', 'Mango'];
-  List<String> TExt = [
-    '7pcs, Priceg',
-    '1kg, Priceg',
-    '2kg, Priceg',
-    '1kg, Priceg'
-  ];
+  List<String> text = ['banana', 'Red Apple', 'orange', 'Mango'];
+  List<String> TExt = ['7pcs', '1kg', '2kg', '1kg'];
   List<String> Description = [
     'Apples are nutritious. Apples may be good for weight loss. apples may be good for your heart. As part of a healtful and varied diet.',
     'Banana are nutritious. A Banana may be good for weight loss. Bananas may be good for your heart. As part of a healtful and varied diet.',
@@ -45,6 +40,12 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   List<String> Vegname = ['Tomato', 'Ginger', 'carrot', 'Potato'];
   List<String> vegPrice = ['\$7.99', '\$4.99', '\$2.99', '\$4.99'];
+  List<String> Veg_kg = [
+    '2Kg, ',
+    '1kg, ',
+    '2kg, ',
+    '1kg',
+  ];
 
   final CarouselSliderController _controller = CarouselSliderController();
   int _current = 3;
@@ -131,9 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           enlargeCenterPage: true,
                           aspectRatio: 1.0,
                           onPageChanged: (index, reason) {
-                            setState(() {
-                              _current = index;
-                            });
+                            setState(() {});
                           }),
                     ),
                   ),
@@ -179,8 +178,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         builder: (context) => ProductDetail(
                                           image: image[index],
                                           price: Price[index],
-                                          text: text[index],
-                                          TExt: TExt[index],
+                                          title: text[index],
+                                          subtitle: TExt[index],
                                           Description: Description[index],
                                         ),
                                       ));
@@ -199,28 +198,32 @@ class _HomeScreenState extends State<HomeScreen> {
                                         height: 80,
                                         width: 80,
                                       ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            text[index],
-                                            style: TextStyle(fontSize: 20),
-                                          ),
-                                          Text(
-                                            TExt[index],
-                                            style: TextStyle(
-                                                color: Colors.grey,
-                                                fontSize: 15),
-                                          )
-                                        ],
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 50),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              text[index],
+                                              style: TextStyle(fontSize: 20),
+                                            ),
+                                            Text(
+                                              TExt[index],
+                                              style: TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: 15),
+                                            )
+                                          ],
+                                        ),
                                       ),
                                       SizedBox(
                                         height: 20,
                                       ),
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(left: 15),
+                                            const EdgeInsets.only(left: 20),
                                         child: Row(
                                           children: [
                                             Text(
@@ -228,7 +231,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               style: TextStyle(fontSize: 20),
                                             ),
                                             SizedBox(
-                                              width: 40,
+                                              width: 30,
                                             ),
                                             GestureDetector(
                                               child: Container(
@@ -261,7 +264,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 25,
                 ),
                 Row(
                   children: [
@@ -270,7 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: TextStyle(fontSize: 25),
                     ),
                     SizedBox(
-                      width: 170,
+                      width: 180,
                     ),
                     TextButton(
                         onPressed: () {},
@@ -281,7 +284,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 SizedBox(
-                  height: 200,
+                  height: 220,
                   child: Padding(
                     padding: const EdgeInsets.only(top: 20),
                     child: Expanded(
@@ -289,52 +292,73 @@ class _HomeScreenState extends State<HomeScreen> {
                           scrollDirection: Axis.horizontal,
                           itemCount: vegetables.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return Container(
-                              width: 150,
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.grey),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20))),
-                              child: Column(
-                                children: [
-                                  Image.asset(
-                                    vegetables[index],
-                                    height: 80,
-                                    width: 80,
-                                  ),
-                                  Text(
-                                    Vegname[index],
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                  // SizedBox(
-                                  //   height: 30,
-                                  // ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        vegPrice[index],
-                                        style: TextStyle(fontSize: 20),
+                            return Padding(
+                              padding: const EdgeInsets.only(right: 10),
+                              child: Container(
+                                width: 150,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.grey),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20))),
+                                child: Column(
+                                  children: [
+                                    Image.asset(
+                                      vegetables[index],
+                                      height: 80,
+                                      width: 80,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 60),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            Vegname[index],
+                                            style: TextStyle(fontSize: 20),
+                                          ),
+                                          Text(
+                                            Veg_kg[index],
+                                            style: TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 17),
+                                          ),
+                                        ],
                                       ),
-                                      SizedBox(
-                                        width: 40,
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 20),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            vegPrice[index],
+                                            style: TextStyle(fontSize: 20),
+                                          ),
+                                          SizedBox(
+                                            width: 30,
+                                          ),
+                                          Container(
+                                            height: 40,
+                                            width: 40,
+                                            decoration: BoxDecoration(
+                                                color: Colors.green,
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(15)),
+                                                shape: BoxShape.rectangle),
+                                            child: IconButton(
+                                              onPressed: () {},
+                                              icon: Icon(Icons.add),
+                                              color: Colors.white,
+                                            ),
+                                          )
+                                        ],
                                       ),
-                                      Container(
-                                        height: 40,
-                                        width: 40,
-                                        decoration: BoxDecoration(
-                                            color: Colors.green,
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(15)),
-                                            shape: BoxShape.rectangle),
-                                        child: IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(Icons.add),
-                                          color: Colors.white,
-                                        ),
-                                      )
-                                    ],
-                                  )
-                                ],
+                                    )
+                                  ],
+                                ),
                               ),
                             );
                           }),

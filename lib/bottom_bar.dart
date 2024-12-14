@@ -1,7 +1,10 @@
 import 'package:bottom_bar_matu/bottom_bar_matu.dart';
 import 'package:flutter/material.dart';
+import 'package:groceries_app/Account.dart';
 import 'package:groceries_app/Explore.dart';
+import 'package:groceries_app/Favourite.dart';
 import 'package:groceries_app/Home_Screen.dart';
+import 'package:groceries_app/MyCart.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -19,9 +22,9 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<Widget> pages = [
     const HomeScreen(),
     const Explore(),
-    const Center(child: Text('Cart Page')),
-    const Center(child: Text('Favourite Page')),
-    const Center(child: Text('Account Page')),
+    const Mycart(),
+    const Favourite(),
+    const Account(),
   ];
 
   final List<BottomBarItem> bottomBarItems = [
@@ -56,9 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       bottomNavigationBar: BottomBarBubble(
         items: bottomBarItems,
         onSelect: (index) {
