@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetail extends StatefulWidget {
-  final String image;
+  final List <String> image;
   final String price;
   final String Description;
   final String title;
@@ -27,15 +27,15 @@ class _ProductDetailState extends State<ProductDetail> {
 
   @override
   Widget build(BuildContext context) {
-    // final List<Widget> imageSliders =widget.image
-    //   .map((item) => Container(
-    //         child: Container(
-    //           child: Image.asset(
-    //             item,
-    //           ),
-    //         ),
-    //       ))
-    //   .toList();
+    final List<Widget> imageSliders =widget.image
+      .map((item) => Container(
+            child: Container(
+              child: Image.asset(
+                item,
+              ),
+            ),
+          ))
+      .toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -71,26 +71,26 @@ class _ProductDetailState extends State<ProductDetail> {
                   bottomRight: Radius.circular(30)),
               color: Colors.grey.shade200,
             ),
-            // child: Container(
-            //   height: 200,
-            //   width: double.infinity,
-            //   child: Expanded(
-            //     child: CarouselSlider(
-            //       items: imageSliders,
-            //       carouselController: _controller,
-            //       options: CarouselOptions(
-            //         autoPlay: true,
-            //         enlargeCenterPage: true,
-            //         aspectRatio: 1.0,
-            //         onPageChanged: (index, reason) {
-            //           setState(() {
-            //             _current = index;
-            //           });
-            //         },
-            //       ),
-            //     ),
-            //   ),
-            // ),
+            child: Container(
+              height: 200,
+              width: double.infinity,
+              child: Expanded(
+                child: CarouselSlider(
+                  items: imageSliders,
+                  carouselController: _controller,
+                  options: CarouselOptions(
+                    autoPlay: true,
+                    enlargeCenterPage: true,
+                    aspectRatio: 1.0,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        _current = index;
+                      });
+                    },
+                  ),
+                ),
+              ),
+            ),
           ),
           SizedBox(
             height: 20,

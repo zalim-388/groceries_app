@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class Mycart extends StatefulWidget {
   const Mycart({super.key});
@@ -8,10 +9,10 @@ class Mycart extends StatefulWidget {
 }
 
 class _MycartState extends State<Mycart> {
-  final List<Map<String, dynamic>> mycart = [
+   final List<Map<String, dynamic>> mycart = [
     {
-      'nmae': 'Bell Pepper Red',
-      'size': '1kg, Price',
+      'name': 'Bell Pepper Red',
+      'size': '1kg',
       'price': '\$4.99',
       'image': 'assets/image/92f1ea7dcce3b5d06cd1b1418f9b9413 3.png',
     },
@@ -37,7 +38,7 @@ class _MycartState extends State<Mycart> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Padding(
         padding: EdgeInsets.only(top: 40),
         child: Column(
@@ -53,9 +54,10 @@ class _MycartState extends State<Mycart> {
               height: 30,
             ),
             Divider(),
-            SizedBox(
-              height: 20,
-            ),
+            Expanded(
+                child: ListView.builder(
+              itemBuilder: (context, index) {},
+            ))
           ],
         ),
       ),

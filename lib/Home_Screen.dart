@@ -176,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => ProductDetail(
-                                          image: image[index],
+                                          image: image,
                                           price: Price[index],
                                           title: text[index],
                                           subtitle: TExt[index],
