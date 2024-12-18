@@ -16,6 +16,7 @@ dependencies:
   bottom_bar_matu: ^1.5.0 # Add the appropriate version here
   carousel_slider: ^5.0.0
   dots_indicator: ^3.0.0
+  shared_preferences: ^2.3.3
 
 dev_dependencies:
   flutter_test:
