@@ -13,28 +13,41 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-  final List <String> fruits=[];
-
-@override
-  
-
-  final List<String> image = [
-    'assets/image/pngwing.com (1).png',
-    'assets/image/pngfuel 1.png',
-    'assets/image/pngegg.png',
-    'assets/image/pngegg (3).png',
+  @override
+  final List<Map<String, String>> fruits = [
+    {
+      "image": "assets/image/pngwing.com (1).png",
+      "name": "Banana",
+      "size": "7pcs",
+      "price": "7pcs",
+      "description":
+          "Bananas are nutritious. Bananas may be good for weight loss. Bananas may be good for your heart."
+    },
+    {
+      "image": "assets/image/pngfuel 1.png",
+      "name": "Red Apple",
+      "size": "1kg",
+      "price": "\$4.69",
+      "description":
+          "Apples are nutritious. Apples may be good for weight loss. Apples may be good for your heart."
+    },
+    {
+      "image": "  assets/image/pngegg.png",
+      "name": "Orange",
+      "size": "2kg",
+      "price": "\$6.99",
+      "description":
+          " Oranges are nutritious. Oranges may be good for weight loss. Oranges may be good for your heart",
+    },
+    {
+      "image": "assets/image/pngegg (3).png",
+      "name": "Mango",
+      "size": "1kg",
+      "price": "\$9.99",
+      "description":
+          "Mangoes are nutritious. Mangoes may be good for weight loss. Mangoes may be good for your heart."
+    }
   ];
-
-  final List<String> text = ['Banana', 'Red Apple', 'Orange', 'Mango'];
-  final List<String> quantity = ['7pcs', '1kg', '2kg', '1kg'];
-  final List<String> description = [
-    'Apples are nutritious. Apples may be good for weight loss. Apples may be good for your heart.',
-    'Bananas are nutritious. Bananas may be good for weight loss. Bananas may be good for your heart.',
-    'Oranges are nutritious. Oranges may be good for weight loss. Oranges may be good for your heart.',
-    'Mangoes are nutritious. Mangoes may be good for weight loss. Mangoes may be good for your heart.',
-  ];
-  final List<String> price = ['\$4.59', '\$4.69', '\$6.99', '\$9.99'];
 
   final List<Map<String, String>> vegetables = [
     {
@@ -82,7 +95,15 @@ class _HomeScreenState extends State<HomeScreen> {
     await prefs.setStringList("cartProducts", existingProducts);
   }
 
+  // final List<String> fruits = [];
+  // Future<void> setViewedProduct(List<String> product) async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   List<String> existingProducts = prefs.getStringList("fruits") ?? [];
 
+  //   existingProducts.add(jsonEncode(product));
+
+  //   await prefs.setStringList("fruits", existingProducts);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -162,8 +183,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Expanded(
                       child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: text.length,
+                          itemCount: fruits.length,
                           itemBuilder: (BuildContext context, int index) {
+                            final fruit = fruits[index];
                             return Padding(
                               padding: const EdgeInsets.only(right: 10),
                               child: GestureDetector(
@@ -172,11 +194,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => ProductDetail(
-                                          image: image,
-                                          price: price[index],
-                                          title: text[index],
-                                          subtitle: text[index],
-                                          Description: description[index],
+                                          image: fruit["image"]
+                                          price: fruit["price"],
+                                          Description: fruit["description"],
+                                          title: fruit["name"],
+                                          subtitle: fruit["size"],
                                         ),
                                       ));
                                 },
@@ -190,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Column(
                                     children: [
                                       Image.asset(
-                                        image[index],
+                                        fruit["image"]!,
                                         height: 80,
                                         width: 80,
                                       ),
@@ -202,11 +224,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              text[index],
+                                              fruit["name"]!,
                                               style: TextStyle(fontSize: 20),
                                             ),
                                             Text(
-                                              text[index],
+                                              fruit["size"]!,
                                               style: TextStyle(
                                                   color: Colors.grey,
                                                   fontSize: 15),
@@ -223,7 +245,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         child: Row(
                                           children: [
                                             Text(
-                                              price[index],
+                                              fruit["price"]!,
                                               style: TextStyle(fontSize: 20),
                                             ),
                                             SizedBox(
@@ -239,10 +261,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           Radius.circular(15)),
                                                   shape: BoxShape.rectangle),
                                               child: IconButton(
-                                                onPressed: () async{
-await saveCartProduct( )
-
-
+                                                onPressed: () async {
+                                                  await saveCartProduct(fruit);
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                        content: Text(
+                                                            '${fruit["name"]} added to cart')),
+                                                  );
                                                 },
                                                 icon: Icon(Icons.add),
                                                 color: Colors.white,
