@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:groceries_app/MyCart.dart';
 import 'package:groceries_app/Product_Detail.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -348,12 +349,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(15)),
                                                 shape: BoxShape.rectangle),
-                                            child: IconButton(
-                                              onPressed: () {},
-                                              icon: Icon(Icons.add),
-                                              color: Colors.white,
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          Mycart(
+                                                        vegetables: vegetables,
+                                                      ),
+                                                    ));
+                                              },
+                                              child: IconButton(
+                                                onPressed: () {},
+                                                icon: Icon(Icons.add),
+                                                color: Colors.white,
+                                              ),
                                             ),
-                                          )
+                                          ),
                                         ],
                                       ),
                                     )

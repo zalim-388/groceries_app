@@ -200,95 +200,95 @@ class _ExploreState extends State<Explore> {
                   ),
                 ),
               ),
-              // Expanded(
-              //   child: GridView.builder(
-              //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              //       crossAxisCount: 2,
-              //       crossAxisSpacing: 5,
-              //       mainAxisSpacing: 15,
-              //       childAspectRatio: 1,
-              //     ),
-              //     itemCount: _DairEggs.length,
-              //     itemBuilder: (context, index) {
-              //       final eggList = _DairEggs[index];
-              //       return Padding(
-              //         padding: const EdgeInsets.symmetric(horizontal: 10),
-              //         child: Container(
-              //           width: 180,
-              //           decoration: BoxDecoration(
-              //             border: Border.all(color: Colors.grey),
-              //             borderRadius: BorderRadius.all(Radius.circular(20)),
-              //           ),
-              //           child: Column(
-              //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //             children: [
-              //               Image.asset(
-              //                 eggList["image"]!,
-              //                 height: 80,
-              //                 width: 80,
-              //               ),
-              //               Padding(
-              //                 padding: const EdgeInsets.only(left: 20),
-              //                 child: Column(
-              //                   crossAxisAlignment: CrossAxisAlignment.start,
-              //                   children: [
-              //                     Text(
-              //                       eggList["name"]!,
-              //                       style: TextStyle(
-              //                           fontSize: 20,
-              //                           fontWeight: FontWeight.bold),
-              //                     ),
-              //                     Text(
-              //                       eggList["quantity"]!,
-              //                       style: TextStyle(
-              //                           color: Colors.grey, fontSize: 14),
-              //                     ),
-              //                     SizedBox(
-              //                       height: 20,
-              //                     ),
-              //                     Row(
-              //                       children: [
-              //                         Text(
-              //                           eggList["price"]!,
-              //                           style: TextStyle(
-              //                               fontSize: 18,
-              //                               fontWeight: FontWeight.bold),
-              //                         ),
-              //                         SizedBox(
-              //                           width: 60,
-              //                         ),
-              //                         Container(
-              //                           height: 40,
-              //                           width: 40,
-              //                           decoration: BoxDecoration(
-              //                               color: Colors.green,
-              //                               borderRadius: BorderRadius.all(
-              //                                   Radius.circular(15))),
-              //                           child: IconButton(
-              //                               onPressed: () {},
-              //                               icon: Icon(
-              //                                 Icons.add,
-              //                                 color: Colors.white,
-              //                               )),
-              //                         )
-              //                       ],
-              //                     )
-              //                   ],
-              //                 ),
-              //               )
-              //             ],
-              //           ),
-              //         ),
-              //       );
-              //     },
-              //   ),
-              // )
+              Expanded(
+                child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 15,
+                    childAspectRatio: 1,
+                  ),
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: _DairEggs.length,
+                  itemBuilder: (context, index) {
+                    final eggList = _DairEggs[index];
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Container(
+                        width: 180,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset(
+                              eggList["image"]!,
+                              height: 80,
+                              width: 80,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    eggList["name"]!,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    eggList["quantity"]!,
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 14),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        eggList["price"]!,
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(
+                                        width: 60,
+                                      ),
+                                      Container(
+                                        height: 40,
+                                        width: 40,
+                                        decoration: BoxDecoration(
+                                            color: Colors.green,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(15))),
+                                        child: IconButton(
+                                            onPressed: () {},
+                                            icon: Icon(
+                                              Icons.add,
+                                              color: Colors.white,
+                                            )),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              )
             ],
           ),
         ),
       ),
     ));
   }
-} 
-
-
+}
