@@ -3,14 +3,14 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Mycart extends StatefulWidget {
-  Mycart({super.key});
+class MyCart extends StatefulWidget {
+  const MyCart({super.key});
 
   @override
-  State<Mycart> createState() => _MycartState();
+  State<MyCart> createState() => _MyCartState();
 }
 
-class _MycartState extends State<Mycart> {
+class _MyCartState extends State<MyCart> {
   List<Map<String, String>> cartItems = [];
   List<int> quantity = [];
 
@@ -67,13 +67,13 @@ class _MycartState extends State<Mycart> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       cartItems.removeAt(index);
-      quantity.removeAt(index);
     });
     saveCartState();
   }
 
   @override
   Widget build(BuildContext context) {
+    print("Building widget with cart items: $cartItems"); // Debug print
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.only(top: 50),
@@ -86,14 +86,15 @@ class _MycartState extends State<Mycart> {
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
               ),
             ),
-            SizedBox(height: 30,),
+            SizedBox(
+              height: 30,
+            ),
             Divider(),
             Expanded(
               child: cartItems.isEmpty
                   ? Center(child: Text('Your cart is empty'))
                   : ListView.builder(
                       itemCount: cartItems.length,
-                    
                       itemBuilder: (context, index) {
                         final item = cartItems[index];
                         return Card(
@@ -103,9 +104,9 @@ class _MycartState extends State<Mycart> {
                           ),
                           child: ListTile(
                             leading: Image.asset(
-                              item["image"] ?? 'assets/images/placeholder.png',
-                              fit: BoxFit.cover,
-                              width: 60,
+                              item["image"] ?? 'image illa..',
+                              width: 80,
+                              height: 80,
                             ),
                             title: Padding(
                               padding: const EdgeInsets.only(top: 30),
@@ -119,7 +120,7 @@ class _MycartState extends State<Mycart> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  item["quantity"]! ?? "N\A",
+                                  item["quantity"] ?? "N\A",
                                   style: TextStyle(
                                       fontSize: 14, color: Colors.grey),
                                 ),
@@ -135,8 +136,8 @@ class _MycartState extends State<Mycart> {
                                       Text('${quantity[index]}'),
                                       IconButton(
                                         onPressed: () => increment(index),
-                                        icon:
-                                            Icon(Icons.add, color: Colors.green),
+                                        icon: Icon(Icons.add,
+                                            color: Colors.green),
                                       ),
                                     ],
                                   ),
@@ -149,7 +150,7 @@ class _MycartState extends State<Mycart> {
                                 onPressed: () => removeItemFromCart(index),
                               ),
                               Text(
-                                item["price"]! ?? "Unnamed price",
+                                item["price"] ?? "Unnamed price",
                                 style: TextStyle(fontSize: 16),
                               ),
                             ]),

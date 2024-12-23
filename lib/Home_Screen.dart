@@ -13,7 +13,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  @override
   final List<Map<String, String>> fruits = [
     {
       "image": "assets/image/pngwing.com (1).png",
@@ -55,24 +54,28 @@ class _HomeScreenState extends State<HomeScreen> {
       "name": "Bell Pepper",
       "quantity": "2Kg",
       "price": "\$7.99",
+      "Description": ""
     },
     {
       "image": "assets/image/pngfuel 3.png",
       "name": "Ginger",
       "quantity": "1kg",
       "price": "\$4.99",
+      "Description": ""
     },
     {
       "image": "assets/image/pngegg (4).png",
       "name": "Carrot",
       "quantity": "30gm",
       "price": "\$5.99",
+      "Description": ""
     },
     {
       "image": "assets/image/pngegg (5).png",
       "name": "Potato",
       "quantity": "2kg",
       "price": "\$4.99",
+      "Description": ""
     },
   ];
 
@@ -82,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
     'https://i0.wp.com/kjfoods.co.in/wp-content/uploads/2022/03/1592574403-veg_web.jpg?fit=595%2C197&ssl=1',
     'https://i0.wp.com/kjfoods.co.in/wp-content/uploads/2022/03/1628671638-fsfhjllz_vegetables-banner.jpg?fit=595%2C171&ssl=1',
   ];
-  Future<void> saveCartProduct(Map<String, String> product) async {
+  Future<void> saveCartProduct(Map<String, dynamic> product) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     // Get the existing list of products, or initialize an empty list if none exist
@@ -93,17 +96,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
     // Save the updated list back to SharedPreferences
     await prefs.setStringList("cartProducts", existingProducts);
+
+    print("kkkkkkkkkkkkkkkkkkk${existingProducts}");
   }
-
-  // final List<String> fruits = [];
-  // Future<void> setViewedProduct(List<String> product) async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   List<String> existingProducts = prefs.getStringList("fruits") ?? [];
-
-  //   existingProducts.add(jsonEncode(product));
-
-  //   await prefs.setStringList("fruits", existingProducts);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -184,7 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: fruits.length,
-                          itemBuilder: (BuildContext context, int index) {
+                          itemBuilder: (BuildContext context, index) {
                             final fruit = fruits[index];
                             return Padding(
                               padding: const EdgeInsets.only(right: 10),
@@ -194,11 +189,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => ProductDetail(
-                                          image: fruit["image"]
-                                          price: fruit["price"],
-                                          Description: fruit["description"],
-                                          title: fruit["name"],
-                                          subtitle: fruit["size"],
+                                          image: fruit['image']!,
+                                          price: fruit["price"]!,
+                                          Description: fruit["description"]!,
+                                          title: fruit["name"]!,
+                                          subtitle: fruit["size"]!,
                                         ),
                                       ));
                                 },
@@ -246,7 +241,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                           children: [
                                             Text(
                                               fruit["price"]!,
-                                              style: TextStyle(fontSize: 20),
                                             ),
                                             SizedBox(
                                               width: 30,
@@ -266,8 +260,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   ScaffoldMessenger.of(context)
                                                       .showSnackBar(
                                                     SnackBar(
-                                                        content: Text(
-                                                            '${fruit["name"]} added to cart')),
+                                                      content: Text(
+                                                          '${fruit["name"]} added to cart'),
+                                                    ),
                                                   );
                                                 },
                                                 icon: Icon(Icons.add),
@@ -303,77 +298,94 @@ class _HomeScreenState extends State<HomeScreen> {
                           final veg = vegetables[index];
                           return Padding(
                               padding: const EdgeInsets.only(right: 10),
-                              child: Container(
-                                width: 150,
-                                decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.grey),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20))),
-                                child: Column(
-                                  children: [
-                                    Image.asset(
-                                      veg["image"]!,
-                                      height: 80,
-                                      width: 80,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 60),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ProductDetail(
+                                          image: veg["image"] ?? '',
+                                          price: veg["price"] ?? '',
+                                          Description: veg["Description"] ?? '',
+                                          title: veg["name"] ?? '',
+                                          subtitle: veg["size"] ?? '',
+                                        ),
+                                      ));
+                                },
+                                child: Container(
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.grey),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(20))),
+                                  child: Column(
+                                    children: [
+                                      Image.asset(
+                                        veg["image"]!,
+                                        height: 80,
+                                        width: 80,
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 60),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              veg["name"]!,
+                                              style: TextStyle(fontSize: 20),
+                                            ),
+                                            Text(
+                                              veg["quantity"]!,
+                                              style: TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: 17),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 20),
+                                        child: Row(children: [
                                           Text(
-                                            veg["name"]!,
+                                            veg["price"]!,
                                             style: TextStyle(fontSize: 20),
                                           ),
-                                          Text(
-                                            veg["quantity"]!,
-                                            style: TextStyle(
-                                                color: Colors.grey,
-                                                fontSize: 17),
+                                          SizedBox(
+                                            width: 30,
                                           ),
-                                        ],
+                                          Container(
+                                            height: 40,
+                                            width: 40,
+                                            decoration: BoxDecoration(
+                                                color: Colors.green,
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(15)),
+                                                shape: BoxShape.rectangle),
+                                            child: IconButton(
+                                              icon: Icon(Icons.add,
+                                                  color: Colors.white),
+                                              onPressed: () async {
+                                                await saveCartProduct(veg);
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(
+                                                        '${veg["name"]} added to cart'),
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        ]),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 20),
-                                      child: Row(children: [
-                                        Text(
-                                          veg["price"]!,
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                        SizedBox(
-                                          width: 30,
-                                        ),
-                                        Container(
-                                          height: 40,
-                                          width: 40,
-                                          decoration: BoxDecoration(
-                                              color: Colors.green,
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(15)),
-                                              shape: BoxShape.rectangle),
-                                          child: IconButton(
-                                            icon: Icon(Icons.add,
-                                                color: Colors.white),
-                                            onPressed: () async {
-                                              await saveCartProduct(veg);
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  content: Text(
-                                                      '${veg["name"]} added to cart'),
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                      ]),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ));
                         },

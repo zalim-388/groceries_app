@@ -5,6 +5,7 @@ import 'package:groceries_app/Explore.dart';
 import 'package:groceries_app/Favourite.dart';
 import 'package:groceries_app/Home_Screen.dart';
 import 'package:groceries_app/MyCart.dart';
+import 'package:groceries_app/MyCart.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -22,7 +23,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<Widget> pages = [
     const HomeScreen(),
     const Explore(),
-    Mycart(),
+    const MyCart(),
     const Favourite(),
     const Account(),
   ];
