@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:groceries_app/Favourite.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProductDetail extends StatefulWidget {
-  final List <String> image;
+  final String image;
   final String price;
   final String Description;
   final String title;
@@ -24,18 +28,29 @@ class ProductDetail extends StatefulWidget {
 class _ProductDetailState extends State<ProductDetail> {
   final CarouselSliderController _controller = CarouselSliderController();
   int _current = 2;
+  int quantity = 1;
+
+  Future<void> Save(Map<String, dynamic> product) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    List<String> exisitingproducts = prefs.getStringList('cartProduct') ?? [];
+
+    exisitingproducts.add(jsonDecode(product as String));
+
+    await prefs.setStringList("cartProduct", exisitingproducts);
+  }
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> imageSliders =widget.image
-      .map((item) => Container(
-            child: Container(
-              child: Image.asset(
-                item,
-              ),
-            ),
-          ))
-      .toList();
+    // final List<Widget> imageSliders = widget.image
+    //     .map((item) => Container(
+    //           child: Container(
+    //             child: Image.asset(
+    //               item,
+    //             ),
+    //           ),
+    //         ))
+    //     .toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -76,7 +91,10 @@ class _ProductDetailState extends State<ProductDetail> {
               width: double.infinity,
               child: Expanded(
                 child: CarouselSlider(
-                  items: imageSliders,
+                  items: [
+                    Image.asset(widget.image),
+                    Image.asset(widget.image),
+                  ],
                   carouselController: _controller,
                   options: CarouselOptions(
                     autoPlay: true,
@@ -121,7 +139,13 @@ class _ProductDetailState extends State<ProductDetail> {
                     Padding(
                       padding: const EdgeInsets.only(left: 200),
                       child: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Favourite(),
+                                ));
+                          },
                           icon: Icon(
                             Icons.favorite_border,
                             color: Colors.grey,
@@ -135,7 +159,11 @@ class _ProductDetailState extends State<ProductDetail> {
                 Row(
                   children: [
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            if (quantity > 1) quantity--;
+                          });
+                        },
                         icon: Icon(
                           Icons.remove,
                           size: 30,
@@ -149,14 +177,19 @@ class _ProductDetailState extends State<ProductDetail> {
                           shape: BoxShape.rectangle),
                       alignment: Alignment.center,
                       child: Text(
-                        '1',
+                        '$quantity',
                         style: TextStyle(fontSize: 17),
                       ),
                     ),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            quantity++;
+                          });
+                        },
                         icon: Icon(
                           Icons.add,
+                          color: Colors.green,
                           size: 30,
                         )),
                     Padding(

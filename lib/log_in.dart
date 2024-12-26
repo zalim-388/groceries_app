@@ -1,6 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:groceries_app/Signup.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
@@ -16,6 +18,13 @@ class _LogInState extends State<LogIn> {
   void initState() {
     super.initState();
     passwordVisible = true;
+    saveCartProduct();
+  }
+
+  Future<void> saveCartProduct() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    prefs.clear();
   }
 
   Widget build(BuildContext context) {

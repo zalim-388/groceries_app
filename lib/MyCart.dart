@@ -3,42 +3,77 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 class Mycart extends StatefulWidget {
-  const Mycart({super.key});
+  Mycart({super.key});
 
   @override
-  State<Mycart> createState() => _MycartState();
+  State<MyCart> createState() => _MyCartState();
 }
 
 class _MycartState extends State<Mycart> {
-  final List<Map<String, dynamic>> mycart = [
-    {
-      'name': 'Bell Pepper Red',
-      'size': '1kg',
-      'price': '\$4.99',
-      'image': 'assets/image/92f1ea7dcce3b5d06cd1b1418f9b9413 3.png',
-    },
-    {
-      'name': 'Egg Chicken Red',
-      'size': '4pcs',
-      'price': '\$1.99',
-      'image': 'assets/image/pngfuel 16.png'
-    },
-    {
-      'name': 'Organic Bananas',
-      'size': '12kg',
-      'price': '\$3.00',
-      'image': 'assets/image/pngwing.com (1).png',
-    },
-    {
-      'name': 'Ginger',
-      'size': '250g',
-      'price': '\$2.99',
-      'image': 'assets/image/pngfuel 3.png',
-    },
-  ];
+  List<Map<String, String>> cartItems = [];
+  List<int> quantity = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getCartProducts();
+  }
+
+  void initializeQuantities() {
+    quantity = cartItems
+        .map((item) => int.tryParse(item["quantity"] ?? "1") ?? 1)
+        .toList();
+  }
+
+  void increment(int index) {
+    setState(() {
+      quantity[index]++;
+      cartItems[index]["quantity"] = quantity[index].toString();
+    });
+    saveCartState();
+  }
+
+  void decrement(int index) {
+    if (quantity[index] > 1) {
+      setState(() {
+        quantity[index]--;
+        cartItems[index]["quantity"] = quantity[index].toString();
+      });
+      saveCartState();
+    }
+  }
+
+  Future<void> getCartProducts() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> savedProducts = prefs.getStringList("cartProducts") ?? [];
+    setState(() {
+      cartItems = savedProducts
+          .map((productJson) =>
+              Map<String, String>.from(jsonDecode(productJson)))
+          .toList();
+      initializeQuantities();
+    });
+  }
+
+  Future<void> saveCartState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> updatedProducts =
+        cartItems.map((item) => jsonEncode(item)).toList();
+    await prefs.setStringList("cartProducts", updatedProducts);
+  }
+
+  Future<void> removeItemFromCart(int index) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      cartItems.removeAt(index);
+      quantity.removeAt(index);
+    });
+    saveCartState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    print("Building widget with cart items: $cartItems"); // Debug print
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.only(top: 50),
@@ -56,9 +91,95 @@ class _MycartState extends State<Mycart> {
             ),
             Divider(),
             Expanded(
-                child: ListView.builder(
-              itemBuilder: (context, index) {},
-            ))
+              child: cartItems.isEmpty
+                  ? Center(child: Text('Your cart is empty'))
+                  : ListView.builder(
+                      itemCount: cartItems.length,
+                      itemBuilder: (context, index) {
+                        final item = cartItems[index];
+                        return Card(
+                          margin: EdgeInsets.symmetric(
+                            vertical: 5,
+                            horizontal: 10,
+                          ),
+                          child: ListTile(
+                            leading: Image.asset(
+                              item["image"] ?? 'assets/images/placeholder.png',
+                              fit: BoxFit.cover,
+                              width: 60,
+                            ),
+                            title: Padding(
+                              padding: const EdgeInsets.only(top: 30),
+                              child: Text(
+                                item["name"] ?? "Unnamed Product",
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  item["quantity"]! ?? "N\A",
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.grey),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 35),
+                                  child: Row(
+                                    children: [
+                                      IconButton(
+                                        onPressed: () => decrement(index),
+                                        icon: Icon(Icons.remove,
+                                            color: Colors.grey),
+                                      ),
+                                      Text('${quantity[index]}'),
+                                      IconButton(
+                                        onPressed: () => increment(index),
+                                        icon: Icon(Icons.add,
+                                            color: Colors.green),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            trailing: Column(children: [
+                              IconButton(
+                                icon: Icon(Icons.delete, color: Colors.red),
+                                onPressed: () => removeItemFromCart(index),
+                              ),
+                              Text(
+                                item["price"]! ?? "Unnamed price",
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ]),
+                            visualDensity: VisualDensity(vertical: 4),
+                          ),
+                        );
+                      },
+                    ),
+            ),
+            Container(
+              height: 70,
+              width: 350,
+              margin: EdgeInsets.all(10),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+                onPressed: () {
+                  // Navigate to the checkout page
+                },
+                child: Text(
+                  'Go to Checkout',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+              ),
+            ),
           ],
         ),
       ),
