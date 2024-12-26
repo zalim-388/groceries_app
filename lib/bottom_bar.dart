@@ -22,9 +22,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<Widget> pages = [
     const HomeScreen(),
     const Explore(),
-    const Mycart(
-      vegetables: [],
-    ),
+    const Mycart(),
     const Favourite(),
     const Account(),
   ];

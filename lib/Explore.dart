@@ -36,6 +36,7 @@ class _ExploreState extends State<Explore> {
     Colors.blue.shade100,
   ];
 
+  List<Map<String, String>> _filteredDairyEggs = [];
   final List<Map<String, String>> _DairEggs = [
     {
       "image": "assets/image/pngfuel 16.png",
@@ -82,17 +83,17 @@ class _ExploreState extends State<Explore> {
   @override
   void initstate() {
     super.initState();
-    _filteredList = _prodcut_name;
+    // _filteredList = _prodcut_name;
+    _filteredList = List.from(_DairEggs);
   }
 
   void _filterLogListBySearchText(String searchText) {
     setState(() {
-      if (searchText.isNotEmpty) {
-        _filteredList = _prodcut_name;
+      if (searchText.isEmpty) {
+        _filteredDairyEggs = List.from(_DairEggs);
       } else {
-        _filteredList = _prodcut_name
-            .where(
-                (name) => name.toLowerCase().contains(searchText.toLowerCase()))
+        _filteredDairyEggs = _DairEggs.where((item) =>
+                item["name"]!.toLowerCase().contains(searchText.toLowerCase()))
             .toList();
       }
     });
@@ -139,8 +140,8 @@ class _ExploreState extends State<Explore> {
                           borderRadius: BorderRadius.all(Radius.circular(20))),
                       fillColor: Colors.grey.shade200,
                       filled: true),
-                  onChanged: (value) => _filterLogListBySearchText(value),
-                  onSubmitted: (value) => _filterLogListBySearchText(value),
+                  onChanged: _filterLogListBySearchText,
+                  onSubmitted: _filterLogListBySearchText,
                 ),
               ),
               Padding(
@@ -200,91 +201,89 @@ class _ExploreState extends State<Explore> {
                   ),
                 ),
               ),
-              Expanded(
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 5,
-                    mainAxisSpacing: 15,
-                    childAspectRatio: 1,
-                  ),
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: _DairEggs.length,
-                  itemBuilder: (context, index) {
-                    final eggList = _DairEggs[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Container(
-                        width: 180,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey),
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Image.asset(
-                              eggList["image"]!,
-                              height: 80,
-                              width: 80,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    eggList["name"]!,
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    eggList["quantity"]!,
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 14),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        eggList["price"]!,
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      SizedBox(
-                                        width: 60,
-                                      ),
-                                      Container(
-                                        height: 40,
-                                        width: 40,
-                                        decoration: BoxDecoration(
-                                            color: Colors.green,
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(15))),
-                                        child: IconButton(
-                                            onPressed: () {},
-                                            icon: Icon(
-                                              Icons.add,
-                                              color: Colors.white,
-                                            )),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              )
+              // Expanded(
+              //   child: GridView.builder(
+              //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              //       crossAxisCount: 2,
+              //       crossAxisSpacing: 5,
+              //       mainAxisSpacing: 15,
+              //       childAspectRatio: 1,
+              //     ),
+              //     itemCount: _DairEggs.length,
+              //     itemBuilder: (context, index) {
+              //       final eggList = _DairEggs[index];
+              //       return Padding(
+              //         padding: const EdgeInsets.symmetric(horizontal: 10),
+              //         child: Container(
+              //           width: 180,
+              //           decoration: BoxDecoration(
+              //             border: Border.all(color: Colors.grey),
+              //             borderRadius: BorderRadius.all(Radius.circular(20)),
+              //           ),
+              //           child: Column(
+              //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //             children: [
+              //               Image.asset(
+              //                 eggList["image"]!,
+              //                 height: 80,
+              //                 width: 80,
+              //               ),
+              //               Padding(
+              //                 padding: const EdgeInsets.only(left: 20),
+              //                 child: Column(
+              //                   crossAxisAlignment: CrossAxisAlignment.start,
+              //                   children: [
+              //                     Text(
+              //                       eggList["name"]!,
+              //                       style: TextStyle(
+              //                           fontSize: 20,
+              //                           fontWeight: FontWeight.bold),
+              //                     ),
+              //                     Text(
+              //                       eggList["quantity"]!,
+              //                       style: TextStyle(
+              //                           color: Colors.grey, fontSize: 14),
+              //                     ),
+              //                     SizedBox(
+              //                       height: 20,
+              //                     ),
+              //                     Row(
+              //                       children: [
+              //                         Text(
+              //                           eggList["price"]!,
+              //                           style: TextStyle(
+              //                               fontSize: 18,
+              //                               fontWeight: FontWeight.bold),
+              //                         ),
+              //                         SizedBox(
+              //                           width: 60,
+              //                         ),
+              //                         Container(
+              //                           height: 40,
+              //                           width: 40,
+              //                           decoration: BoxDecoration(
+              //                               color: Colors.green,
+              //                               borderRadius: BorderRadius.all(
+              //                                   Radius.circular(15))),
+              //                           child: IconButton(
+              //                               onPressed: () {},
+              //                               icon: Icon(
+              //                                 Icons.add,
+              //                                 color: Colors.white,
+              //                               )),
+              //                         )
+              //                       ],
+              //                     )
+              //                   ],
+              //                 ),
+              //               )
+              //             ],
+              //           ),
+              //         ),
+              //       );
+              //     },
+              //   ),
+              // )
             ],
           ),
         ),

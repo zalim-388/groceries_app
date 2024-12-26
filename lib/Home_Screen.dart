@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:groceries_app/MyCart.dart';
 import 'package:groceries_app/Product_Detail.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,74 +14,114 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<String> image = [
-    'assets/image/pngwing.com (1).png',
-    'assets/image/pngfuel 1.png',
-    'assets/image/pngegg.png',
-    'assets/image/pngegg (3).png',
+  @override
+  final List<Map<String, String>> fruits = [
+    {
+      "image": "assets/image/pngwing.com (1).png",
+      "name": "Banana",
+      "size": "7pcs",
+      "price": "7pcs",
+      "description":
+          "Bananas are nutritious. Bananas may be good for weight loss. Bananas may be good for your heart."
+    },
+    {
+      "image": "assets/image/pngfuel 1.png",
+      "name": "Red Apple",
+      "size": "1kg",
+      "price": "\$4.69",
+      "description":
+          "Apples are nutritious. Apples may be good for weight loss. Apples may be good for your heart."
+    },
+    {
+      "image": "  assets/image/pngegg.png",
+      "name": "Orange",
+      "size": "2kg",
+      "price": "\$6.99",
+      "description":
+          " Oranges are nutritious. Oranges may be good for weight loss. Oranges may be good for your heart",
+    },
+    {
+      "image": "assets/image/pngegg (3).png",
+      "name": "Mango",
+      "size": "1kg",
+      "price": "\$9.99",
+      "description":
+          "Mangoes are nutritious. Mangoes may be good for weight loss. Mangoes may be good for your heart."
+    }
   ];
 
-  List<String> text = ['banana', 'Red Apple', 'orange', 'Mango'];
-  List<String> TExt = ['7pcs', '1kg', '2kg', '1kg'];
-  List<String> Description = [
-    'Apples are nutritious. Apples may be good for weight loss. apples may be good for your heart. As part of a healtful and varied diet.',
-    'Banana are nutritious. A Banana may be good for weight loss. Bananas may be good for your heart. As part of a healtful and varied diet.',
-    'orange are nutritious. oranges may be good for weight loss. orange may be good for your heart. As part of a healtful and varied diet.',
-    'Mango are nutritious.Mangos may be good for weight loss. Mangos may be good for your heart. As part of a healtful and varied diet.'
+  final List<Map<String, String>> vegetables = [
+    {
+      "image": "assets/image/92f1ea7dcce3b5d06cd1b1418f9b9413 3.png",
+      "name": "Bell Pepper",
+      "quantity": "2Kg",
+      "price": "\$7.99",
+    },
+    {
+      "image": "assets/image/pngfuel 3.png",
+      "name": "Ginger",
+      "quantity": "1kg",
+      "price": "\$4.99",
+    },
+    {
+      "image": "assets/image/pngegg (4).png",
+      "name": "Carrot",
+      "quantity": "30gm",
+      "price": "\$5.99",
+    },
+    {
+      "image": "assets/image/pngegg (5).png",
+      "name": "Potato",
+      "quantity": "2kg",
+      "price": "\$4.99",
+    },
   ];
-  List<String> Price = ['\$4.59', '\$4.69', '\$6.99', '\$9.99'];
-
-  List<String> Apple = [
-    'assets/image/pngwing.com (3).png',
-    'assets/image/pngwing.com (2).png'
-  ];
-
-  List<String> vegetables = [
-    'assets/image/92f1ea7dcce3b5d06cd1b1418f9b9413 3.png',
-    'assets/image/pngfuel 3.png',
-    'assets/image/pngegg (4).png',
-    'assets/image/pngegg (5).png'
-  ];
-  List<String> Vegname = ['Tomato', 'Ginger', 'carrot', 'Potato'];
-  List<String> vegPrice = ['\$7.99', '\$4.99', '\$2.99', '\$4.99'];
-  List<String> Veg_kg = [
-    '2Kg, ',
-    '1kg, ',
-    '2kg, ',
-    '1kg',
-  ];
-
-  final CarouselSliderController _controller = CarouselSliderController();
-  int _current = 3;
 
   final List<String> imgList = [
-    'https://www.shutterstock.com/image-vector/farm-fresh-produce-delivery-home-260nw-2154869859.jpg'
-        'https://freshfarmse.com/wp-content/uploads/2023/11/WhatsApp-Image-2023-11-09-at-1.51.07-AM.jpeg',
+    'https://www.shutterstock.com/image-vector/farm-fresh-produce-delivery-home-260nw-2154869859.jpg',
+    'https://freshfarmse.com/wp-content/uploads/2023/11/WhatsApp-Image-2023-11-09-at-1.51.07-AM.jpeg',
     'https://i0.wp.com/kjfoods.co.in/wp-content/uploads/2022/03/1592574403-veg_web.jpg?fit=595%2C197&ssl=1',
-    'https://i.pinimg.com/474x/b4/70/d0/b470d0e41336aa7a70e20f676e93be5e.jpg',
-    'https://i0.wp.com/kjfoods.co.in/wp-content/uploads/2022/03/1628671638-fsfhjllz_vegetables-banner.jpg?fit=595%2C171&ssl=1'
+    'https://i0.wp.com/kjfoods.co.in/wp-content/uploads/2022/03/1628671638-fsfhjllz_vegetables-banner.jpg?fit=595%2C171&ssl=1',
   ];
+  Future<void> saveCartProduct(Map<String, String> product, dynamic SharedPreferences) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    // Get the existing list of products, or initialize an empty list if none exist
+    List<String> existingProducts = prefs.getStringList("cartProducts") ?? [];
+
+    // Encode the new product and add it to the list
+    existingProducts.add(jsonEncode(product));
+
+    // Save the updated list back to SharedPreferences
+    await prefs.setStringList("cartProducts", existingProducts);
+  }
+
+}
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, dynamic imgList) {
     final List<Widget> imageSliders = imgList
-        .map((item) => Container(
-              child: Container(
-                child: Image.network(
-                  item,
-                ),
+        .map((item) => ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: Image.network(
+                item,
+                fit: BoxFit.cover,
+                width: double.infinity,
               ),
             ))
         .toList();
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
-        child: Padding(
-          padding: const EdgeInsets.only(top: 40),
-          child: SingleChildScrollView(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 50),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SingleChildScrollView(
+                Padding(
+                  padding: const EdgeInsets.only(left: 180),
                   child: Container(
                     height: 50,
                     width: 50,
@@ -91,74 +134,40 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Row(
                   children: [
-                    SizedBox(
-                      width: 80,
-                    ),
-                    IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.location_on_rounded,
-                          color: Colors.grey,
-                          size: 35,
-                        )),
+                    Icon(Icons.location_on, color: Colors.grey),
+                    SizedBox(width: 8),
                     Text(
                       'Dhaka, Banassre',
-                      style:
-                          TextStyle(color: Colors.grey.shade800, fontSize: 20),
+                      style: TextStyle(fontSize: 16, color: Colors.grey),
                     ),
                   ],
                 ),
+                SizedBox(height: 16),
                 TextField(
                   decoration: InputDecoration(
-                    prefixIcon: Icon(
-                      Icons.search,
-                    ),
+                    prefixIcon: Icon(Icons.search),
                     hintText: 'Search Store',
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide.none),
-                    fillColor: Colors.grey.shade200,
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide.none,
+                    ),
                     filled: true,
+                    fillColor: Colors.grey.shade200,
                   ),
                 ),
-                SizedBox(
-                  height: 200,
-                  width: 368,
-                  child: Expanded(
-                    child: CarouselSlider(
-                      items: imageSliders,
-                      carouselController: _controller,
-                      options: CarouselOptions(
-                          autoPlay: true,
-                          enlargeCenterPage: true,
-                          aspectRatio: 1.0,
-                          onPageChanged: (index, reason) {
-                            setState(() {});
-                          }),
-                    ),
+                SizedBox(height: 16),
+                CarouselSlider(
+                  items: imageSliders,
+                  options: CarouselOptions(
+                    autoPlay: true,
+                    enlargeCenterPage: true,
+                    aspectRatio: 2.0,
                   ),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Exclusive Offer',
-                          style: TextStyle(fontSize: 25),
-                        )),
-                    SizedBox(
-                      width: 150,
-                    ),
-                    TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'See all',
-                          style: TextStyle(color: Colors.green, fontSize: 17),
-                        ))
-                  ],
+                SizedBox(height: 16),
+                Text(
+                  'Exclusive Offers',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 15),
@@ -167,8 +176,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Expanded(
                       child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: TExt.length,
+                          itemCount: fruits.length,
                           itemBuilder: (BuildContext context, int index) {
+                            final fruit = fruits[index];
                             return Padding(
                               padding: const EdgeInsets.only(right: 10),
                               child: GestureDetector(
@@ -177,11 +187,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => ProductDetail(
-                                          image: image,
-                                          price: Price[index],
-                                          title: text[index],
-                                          subtitle: TExt[index],
-                                          Description: Description[index],
+                                          // image: fruit["image"]
+                                          // price: fruit["price"],
+                                          // Description: fruit["description"],
+                                          // title: fruit["name"],
+                                          // subtitle: fruit["size"],
                                         ),
                                       ));
                                 },
@@ -195,7 +205,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Column(
                                     children: [
                                       Image.asset(
-                                        image[index],
+                                        fruit["image"]!,
                                         height: 80,
                                         width: 80,
                                       ),
@@ -207,11 +217,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              text[index],
+                                              fruit["name"]!,
                                               style: TextStyle(fontSize: 20),
                                             ),
                                             Text(
-                                              TExt[index],
+                                              fruit["size"]!,
                                               style: TextStyle(
                                                   color: Colors.grey,
                                                   fontSize: 15),
@@ -228,28 +238,33 @@ class _HomeScreenState extends State<HomeScreen> {
                                         child: Row(
                                           children: [
                                             Text(
-                                              Price[index],
+                                              fruit["price"]!,
                                               style: TextStyle(fontSize: 20),
                                             ),
                                             SizedBox(
                                               width: 30,
                                             ),
-                                            GestureDetector(
-                                              child: Container(
-                                                height: 40,
-                                                width: 40,
-                                                decoration: BoxDecoration(
-                                                    color: Colors.green,
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                15)),
-                                                    shape: BoxShape.rectangle),
-                                                child: IconButton(
-                                                  onPressed: () {},
-                                                  icon: Icon(Icons.add),
-                                                  color: Colors.white,
-                                                ),
+                                            Container(
+                                              height: 40,
+                                              width: 40,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.green,
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(15)),
+                                                  shape: BoxShape.rectangle),
+                                              child: IconButton(
+                                                onPressed: () async {
+                                                  await saveCartProduct(fruit);
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                        content: Text(
+                                                            '${fruit["name"]} added to cart')),
+                                                  );
+                                                },
+                                                icon: Icon(Icons.add),
+                                                color: Colors.white,
                                               ),
                                             ),
                                           ],
@@ -264,25 +279,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 25,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'Best Selling',
-                      style: TextStyle(fontSize: 25),
-                    ),
-                    SizedBox(
-                      width: 180,
-                    ),
-                    TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'see all',
-                          style: TextStyle(color: Colors.green, fontSize: 17),
-                        ))
-                  ],
+                SizedBox(height: 16),
+                Text(
+                  'Best Selling',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: 220,
@@ -290,10 +290,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.only(top: 20),
                     child: Expanded(
                       child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: vegetables.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Padding(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: vegetables.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final veg = vegetables[index];
+                          return Padding(
                               padding: const EdgeInsets.only(right: 10),
                               child: Container(
                                 width: 150,
@@ -304,7 +305,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Column(
                                   children: [
                                     Image.asset(
-                                      vegetables[index],
+                                      veg["image"]!,
                                       height: 80,
                                       width: 80,
                                     ),
@@ -315,11 +316,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            Vegname[index],
+                                            veg["name"]!,
                                             style: TextStyle(fontSize: 20),
                                           ),
                                           Text(
-                                            Veg_kg[index],
+                                            veg["quantity"]!,
                                             style: TextStyle(
                                                 color: Colors.grey,
                                                 fontSize: 17),
@@ -335,7 +336,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       child: Row(
                                         children: [
                                           Text(
-                                            vegPrice[index],
+                                            veg["price"]!,
                                             style: TextStyle(fontSize: 20),
                                           ),
                                           SizedBox(
@@ -349,24 +350,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(15)),
                                                 shape: BoxShape.rectangle),
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          Mycart(
-                                                        vegetables: vegetables,
-                                                      ),
-                                                    ));
-                                              },
-                                              child: IconButton(
-                                                onPressed: () {},
-                                                icon: Icon(Icons.add),
-                                                color: Colors.white,
-                                              ),
+                                            child: IconButton(
+                                              onPressed: () {},
+                                              icon: Icon(Icons.add),
+                                              color: Colors.white,
                                             ),
-                                          ),
+                                          )
                                         ],
                                       ),
                                     )
@@ -377,7 +366,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           }),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
