@@ -2,23 +2,14 @@ import 'dart:convert';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:groceries_app/Favourite.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProductDetail extends StatefulWidget {
-  final String image;
-  final String price;
-  final String Description;
-  final String title;
-  final String subtitle;
+  final Map<String, String> data;
 
   const ProductDetail({
     super.key,
-    required this.image,
-    required this.price,
-    required this.Description,
-    required this.title,
-    required this.subtitle,
+    required this.data,
   });
 
   @override
@@ -30,14 +21,12 @@ class _ProductDetailState extends State<ProductDetail> {
   int _current = 2;
   int quantity = 1;
 
-  Future<void> Save(Map<String, dynamic> product) async {
+  List<Map<String, dynamic>> favoriteItems = [];
+  Future<void> savefavstate(Map<String, dynamic> item) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    List<String> exisitingproducts = prefs.getStringList('cartProduct') ?? [];
-
-    exisitingproducts.add(jsonDecode(product as String));
-
-    await prefs.setStringList("cartProduct", exisitingproducts);
+    List<String> updatedProducts =
+        favoriteItems.map((item) => jsonEncode(item)).toList();
+    await prefs.setStringList("favProducts", updatedProducts);
   }
 
   @override
@@ -92,8 +81,8 @@ class _ProductDetailState extends State<ProductDetail> {
               child: Expanded(
                 child: CarouselSlider(
                   items: [
-                    Image.asset(widget.image),
-                    Image.asset(widget.image),
+                    Image.asset(widget.data['image']??''),
+                    Image.asset(widget.data['image']??''),
                   ],
                   carouselController: _controller,
                   options: CarouselOptions(
@@ -124,13 +113,13 @@ class _ProductDetailState extends State<ProductDetail> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          widget.title,
+                          widget.data['name']??'',
                           style: TextStyle(fontSize: 30),
                         ),
                         Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              widget.subtitle,
+                              widget.data['size']??'',
                               style:
                                   TextStyle(color: Colors.grey, fontSize: 20),
                             )),
@@ -139,12 +128,19 @@ class _ProductDetailState extends State<ProductDetail> {
                     Padding(
                       padding: const EdgeInsets.only(left: 200),
                       child: IconButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Favourite(),
-                                ));
+                          onPressed: () async {
+                            favoriteItems.add(
+                              {
+                                'title': widget.data['title'],
+                                'subtitle': widget.data['subtitle'],
+                                'price': widget.data['price'],
+                                'image': widget.data['image'],
+                              },
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                  content: Text("${widget.data['name']} add to favorite")),
+                            );
                           },
                           icon: Icon(
                             Icons.favorite_border,
@@ -230,7 +226,7 @@ class _ProductDetailState extends State<ProductDetail> {
                   ],
                 ),
                 Text(
-                  widget.Description,
+                  widget.data['description']??'S',
                   style: TextStyle(fontSize: 17),
                 ),
                 SizedBox(

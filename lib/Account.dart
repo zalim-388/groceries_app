@@ -10,6 +10,15 @@ class Account extends StatefulWidget {
 class _AccountState extends State<Account> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            )),
+      ),
+    );
   }
 }

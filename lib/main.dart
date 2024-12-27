@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:groceries_app/splash_Screen.dart';
 
-import 'package:groceries_app/mycart.dart';
-
 void main() {
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  Size size;
+  double height;
+  double width;
+
+  MyApp({super.key})
+      : size = Size.zero,
+        height = 0.0,
+        width = 0.0;
 
   @override
   Widget build(BuildContext context) {
-    MediaQuery.of(context).size;
-
+      size = MediaQuery.of(context).size; 
+    height = size.height;
+    width = size.width;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
       home: SplashScreen(),
     );
   }

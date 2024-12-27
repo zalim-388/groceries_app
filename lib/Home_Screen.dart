@@ -97,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // Save the updated list back to SharedPreferences
     await prefs.setStringList("cartProducts", existingProducts);
 
-    print("kkkkkkkkkkkkkkkkkkk${existingProducts}");
+    print("kkkkkkkkkk${existingProducts}");
   }
 
   @override
@@ -118,12 +118,12 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 25),
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(top: 50),
+            padding: const EdgeInsets.only(top: 60),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 180),
+                  padding: const EdgeInsets.only(left: 150),
                   child: Container(
                     height: 50,
                     width: 50,
@@ -134,15 +134,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         shape: BoxShape.rectangle),
                   ),
                 ),
-                Row(
-                  children: [
-                    Icon(Icons.location_on, color: Colors.grey),
-                    SizedBox(width: 8),
-                    Text(
-                      'Dhaka, Banassre',
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
-                    ),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(left: 100),
+                  child: Row(
+                    children: [
+                      Icon(Icons.location_on, color: Colors.grey),
+                      SizedBox(width: 8),
+                      Text(
+                        'Dhaka, Banassre',
+                        style: TextStyle(fontSize: 16, color: Colors.grey),
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(height: 16),
                 TextField(
@@ -189,11 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => ProductDetail(
-                                          image: fruit['image']!,
-                                          price: fruit["price"]!,
-                                          Description: fruit["description"]!,
-                                          title: fruit["name"]!,
-                                          subtitle: fruit["size"]!,
+                                          data: fruit,
                                         ),
                                       ));
                                 },
@@ -304,11 +303,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => ProductDetail(
-                                          image: veg["image"] ?? '',
-                                          price: veg["price"] ?? '',
-                                          Description: veg["Description"] ?? '',
-                                          title: veg["name"] ?? '',
-                                          subtitle: veg["size"] ?? '',
+                                          data: veg,
                                         ),
                                       ));
                                 },

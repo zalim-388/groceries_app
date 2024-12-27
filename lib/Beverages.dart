@@ -76,6 +76,7 @@ class _BeveragesState extends State<Beverages> {
     }
   ];
 
+  bool? check = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,9 +98,101 @@ class _BeveragesState extends State<Beverages> {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 2),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (context) => Padding(
+                      padding: const EdgeInsets.only(top: 30),
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * 0.85,
+                        alignment: Alignment.topLeft,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Row(
+                                children: [
+                                  IconButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      icon: Icon(
+                                        Icons.close,
+                                        color: Colors.black,
+                                        size: 30,
+                                      )),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 120),
+                                    child: Text(
+                                      'Filters',
+                                      style: TextStyle(
+                                          fontSize: 29,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                              height: MediaQuery.of(context).size.height * 0.75,
+                              decoration: BoxDecoration(
+                                  color: Colors.grey.shade200,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(50),
+                                    topRight: Radius.circular(50),
+                                  )),
+                              alignment: Alignment.topLeft,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 25),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 20),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        'Categories',
+                                        style: TextStyle(fontSize: 25),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Checkbox(
+                                            activeColor: Colors.green,
+                                              tristate: true,
+                                              value: check,
+                                              onChanged: (bool? value) {
+                                                setState(() {
+                                                  check = value;
+                                                });
+                                              }),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text(
+                                            'Eggs',
+                                            style: TextStyle(fontSize: 16),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
                 icon: Icon(
                   Icons.tune_outlined,
                   size: 30,

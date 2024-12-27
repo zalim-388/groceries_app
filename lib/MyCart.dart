@@ -73,7 +73,7 @@ class _MyCartState extends State<MyCart> {
 
   @override
   Widget build(BuildContext context) {
-    print("Building widget with cart items: $cartItems"); // Debug print
+    print("Building widget with cart items: $cartItems");
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.only(top: 50),
