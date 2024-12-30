@@ -1,16 +1,15 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class MyCart extends StatefulWidget {
-  const MyCart({super.key});
+class Mycart extends StatefulWidget {
+  Mycart({super.key});
 
   @override
   State<MyCart> createState() => _MyCartState();
 }
 
-class _MyCartState extends State<MyCart> {
+class _MycartState extends State<Mycart> {
   List<Map<String, String>> cartItems = [];
   List<int> quantity = [];
 
@@ -67,6 +66,7 @@ class _MyCartState extends State<MyCart> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       cartItems.removeAt(index);
+      quantity.removeAt(index);
     });
     saveCartState();
   }
@@ -104,9 +104,9 @@ class _MyCartState extends State<MyCart> {
                           ),
                           child: ListTile(
                             leading: Image.asset(
-                              item["image"] ?? 'image illa..',
-                              width: 80,
-                              height: 80,
+                              item["image"] ?? 'assets/images/placeholder.png',
+                              fit: BoxFit.cover,
+                              width: 60,
                             ),
                             title: Padding(
                               padding: const EdgeInsets.only(top: 30),
@@ -120,7 +120,7 @@ class _MyCartState extends State<MyCart> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  item["quantity"] ?? "N\A",
+                                  item["quantity"]! ?? "N\A",
                                   style: TextStyle(
                                       fontSize: 14, color: Colors.grey),
                                 ),
@@ -150,7 +150,7 @@ class _MyCartState extends State<MyCart> {
                                 onPressed: () => removeItemFromCart(index),
                               ),
                               Text(
-                                item["price"] ?? "Unnamed price",
+                                item["price"]! ?? "Unnamed price",
                                 style: TextStyle(fontSize: 16),
                               ),
                             ]),

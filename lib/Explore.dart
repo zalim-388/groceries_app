@@ -153,144 +153,159 @@ class _ExploreState extends State<Explore> {
                   borderSide: BorderSide.none,
                 ),
               ),
-              onChanged: _filterList,
-              // onSubmitted: _filterDairyEggs,
-            ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  childAspectRatio: 1,
-                ),
-                itemCount: _filteredList.length,
-                itemBuilder: (context, index) {
-                  final product = _filteredList[index];
-                  return GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => Beverages()),
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: Colors.grey),
-                      ),
+              Expanded(
+                child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 15,
+                    childAspectRatio: 1,
+                  ),
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  itemCount: _filteredDairyEggs.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    final eggList = _filteredDairyEggs[index];
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Beverages(),
+                            ));
+                      },
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child: Image.asset(product["image"] ?? '',
-                                  height: 80, width: 80),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child: Text(product["name"] ?? '',
-                                  style: const TextStyle(
-                                      fontSize: 16, fontWeight: FontWeight.bold)),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child: Text(product["quantity"] ?? '',
-                                  style: const TextStyle(
-                                      color: Colors.grey, fontSize: 14)),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child: Row(
-                                children: [
-                                  Text(product["price"] ?? '',
-                                      style: const TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold)),
-                                  const SizedBox(width: 30),
-                                  Container(
-                                    height: 40,
-                                    width: 40,
-                                    decoration: BoxDecoration(
-                                        color: Colors.green,
-                                        borderRadius:
-                                            BorderRadius.all(Radius.circular(15)),
-                                        shape: BoxShape.rectangle),
-                                    child: IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(Icons.add),
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Container(
+                          width: 180,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Image.asset(
+                                eggList["image"]!,
+                                height: 80,
+                                width: 80,
                               ),
-                            ),
-                          ],
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      eggList["name"]!,
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      eggList["quantity"]!,
+                                      style: TextStyle(
+                                          color: Colors.grey, fontSize: 14),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          eggList["price"]!,
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(
+                                          width: 60,
+                                        ),
+                                        Container(
+                                          height: 40,
+                                          width: 40,
+                                          decoration: BoxDecoration(
+                                              color: Colors.green,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(15))),
+                                          child: IconButton(
+                                              onPressed: () {},
+                                              icon: Icon(
+                                                Icons.add,
+                                                color: Colors.white,
+                                              )),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
-                      
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
-            ),
-            // Padding(
-            //   padding: const EdgeInsets.only(top: 30),
-
-            //     child: Expanded(
-            //       child: GridView.builder(
-            //         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            //           crossAxisCount: 2,
-            //           crossAxisSpacing: 15,
-            //           mainAxisSpacing: 15,
-            //           childAspectRatio: 1,
-            //         ),
-            //         itemCount: _filteredList.length,
-            //         itemBuilder: (context, index) {
-            //           final Dairyeggs = _filteredDairyEggs[index];
-            //           return GestureDetector(
-            //             onTap: () {
-            //               Navigator.push(
-            //                   context,
-            //                   MaterialPageRoute(
-            //                     builder: (context) => Beverages(),
-            //                   ));
-            //             },
-            //             child: Container(
-            //               decoration: BoxDecoration(
-            //                 borderRadius: BorderRadius.all(Radius.circular(20)),
-            //                 // border: Border.all(color: prodcut_Color[index]),
-            //               ),
-            //               child: Column(
-            //                 children: [
-            //                   SizedBox(
-            //                     height: 10,
-            //                   ),
-            //                   Image.asset(Dairyeggs["image"] ?? '',
-            //                       height: 80, width: 80),
-            //                   Text(Dairyeggs["name"] ?? '',
-            //                       style: const TextStyle(
-            //                           fontSize: 16,
-            //                           fontWeight: FontWeight.bold)),
-            //                   Text(Dairyeggs["quantity"] ?? '',
-            //                       style: const TextStyle(
-            //                           color: Colors.grey, fontSize: 14)),
-            //                   Text(Dairyeggs["price"] ?? '',
-            //                       style: const TextStyle(
-            //                           fontSize: 16,
-            //                           fontWeight: FontWeight.bold)),
-            //                 ],
-            //               ),
-            //             ),
-            //           );
-            //         },
-            //       ),
-            //     ),
-
-            // ),
-          ],
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 30),
+              //   child: SizedBox(
+              //     height: 600,
+              //     child: Expanded(
+              //       child: GridView.builder(
+              //         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              //           crossAxisCount: 2,
+              //           crossAxisSpacing: 15,
+              //           mainAxisSpacing: 15,
+              //           childAspectRatio: 1,
+              //         ),
+              //         physics: const AlwaysScrollableScrollPhysics(),
+              //         itemCount: _filteredList.length,
+              //         shrinkWrap: true,
+              //         itemBuilder: (context, index) {
+              //           return GestureDetector(
+              //             onTap: () {
+              //               Navigator.push(
+              //                   context,
+              //                   MaterialPageRoute(
+              //                     builder: (context) => Beverages(),
+              //                   ));
+              //             },
+              //             child: Container(
+              //               decoration: BoxDecoration(
+              //                 borderRadius:
+              //                     BorderRadius.all(Radius.circular(20)),
+              //                 // border: Border.all(color: prodcut_Color[index]),
+              //                 color: _prodcut_Color[index],
+              //               ),
+              //               child: Column(
+              //                 children: [
+              //                   SizedBox(
+              //                     height: 10,
+              //                   ),
+              //                   Image.asset(
+              //                     _Product_img[index],
+              //                     height: 80,
+              //                     width: 80,
+              //                   ),
+              //                   SizedBox(
+              //                     height: 20,
+              //                   ),
+              //                   Text(
+              //                     _prodcut_name[index],
+              //                     style: TextStyle(fontSize: 20),
+              //                   )
+              //                 ],
+              //               ),
+              //             ),
+              //           );
+              //         },
+              //       ),
+              //     ),
+              //   ),
+              // ),
+            ],
+          ),
         ),
       ),
     );

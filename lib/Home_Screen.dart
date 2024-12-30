@@ -2,8 +2,9 @@ import 'dart:convert';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:groceries_app/MyCart.dart';
 import 'package:groceries_app/Product_Detail.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -85,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
     'https://i0.wp.com/kjfoods.co.in/wp-content/uploads/2022/03/1592574403-veg_web.jpg?fit=595%2C197&ssl=1',
     'https://i0.wp.com/kjfoods.co.in/wp-content/uploads/2022/03/1628671638-fsfhjllz_vegetables-banner.jpg?fit=595%2C171&ssl=1',
   ];
-  Future<void> saveCartProduct(Map<String, dynamic> product) async {
+  Future<void> saveCartProduct(Map<String, String> product) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     // Get the existing list of products, or initialize an empty list if none exist
@@ -97,11 +98,11 @@ class _HomeScreenState extends State<HomeScreen> {
     // Save the updated list back to SharedPreferences
     await prefs.setStringList("cartProducts", existingProducts);
 
-    print("kkkkkkkkkk${existingProducts}");
+    print("kkkkkkkkkkkkkkkkkkk${existingProducts}");
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, dynamic imgList) {
     final List<Widget> imageSliders = imgList
         .map((item) => ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
@@ -192,7 +193,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => ProductDetail(
-                                          data: fruit,
+                                          image: fruit['image']!,
+                                          price: fruit["price"]!,
+                                          Description: fruit["description"]!,
+                                          title: fruit["name"]!,
+                                          subtitle: fruit["size"]!,
                                         ),
                                       ));
                                 },
@@ -303,7 +308,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => ProductDetail(
-                                          data: veg,
+                                          image: veg["image"] ?? '',
+                                          price: veg["price"] ?? '',
+                                          Description: veg["Description"] ?? '',
+                                          title: veg["name"] ?? '',
+                                          subtitle: veg["size"] ?? '',
                                         ),
                                       ));
                                 },
