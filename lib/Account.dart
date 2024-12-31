@@ -22,37 +22,66 @@ class _AccountState extends State<Account> {
                 color: Colors.white,
               )),
         ),
-        backgroundColor: Colors.green,
-        body: Stack(
+        backgroundColor: Colors.green.shade800,
+        body: Column(
           children: [
-            Container(
-              height: 200,
-              width: 420,
-              decoration: BoxDecoration(
-                color: Colors.green.shade400,
-              ),
-            ),
-            Positioned(
-                left: 70,
-                top: 50,
-                child: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  radius: 50,
-                  child: Icon(
-                    Icons.person,
-                    size: 50,
-                    color: Colors.green,
+            Stack(
+              children: [
+                Container(
+                  height: 250,
+                  width: 420,
+                  decoration: BoxDecoration(
+                    color: Colors.green.shade400,
                   ),
-                )),
-            Positioned(
-              child: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  radius: 20,
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.camera_alt_outlined),
-                  )),
+                ),
+                Positioned(
+                    left: 150,
+                    top: 60,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 50,
+                      child: Icon(
+                        Icons.person,
+                        size: 50,
+                        color: Colors.green,
+                      ),
+                    )),
+                Positioned(
+                  left: 200,
+                  top: 130,
+                  child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 20,
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: Icon(Icons.camera_alt_outlined),
+                      )),
+                ),
+                Positioned(
+                  right: 30,
+                  top: 100,
+                  child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 15,
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: Icon(Icons.camera_alt_outlined),
+                        iconSize: 15,
+                      )),
+                ),
+              ],
             ),
+            Row(
+              children: [
+                Container(
+                  height: 50,
+                  width: 50,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                )
+              ],
+            )
           ],
         ));
   }

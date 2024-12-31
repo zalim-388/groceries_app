@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProductDetail extends StatefulWidget {
-  final Map<String, String> data;
-
+  // final Map<String, String> data;
+  final String image;
+     final String   price;
+   final  String Description;
+   final  String title;
+  final String subtitle;
   const ProductDetail({
     super.key,
-    required this.data,
-    required String image,
-    required String price,
-    required String Description,
-    required String title,
-    required String subtitle,
+    // required this.data,
+   required this.image, required this.price, required this.Description, required this.title, required this.subtitle,
   });
 
   @override
@@ -26,15 +26,24 @@ class _ProductDetailState extends State<ProductDetail> {
   int _current = 2;
   int quantity = 1;
 
-  List<Map<String, dynamic>> favoriteItems = [];
-  Future<void> savefavstate(Map<String, dynamic> item) async {
+  List<Map<String, String>> favoriteItems = [];
+  Future<void> savefavstate(Map<String, String> item) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> updatedProducts =
         favoriteItems.map((item) => jsonEncode(item)).toList();
     await prefs.setStringList("favProducts", updatedProducts);
   }
 
+  bool favorite = false;
+
   @override
+  void isfavorite() {
+    
+    setState(() {
+      favorite = !favorite;
+    });
+  }
+
   Widget build(BuildContext context) {
     // final List<Widget> imageSliders = widget.image
     //     .map((item) => Container(
@@ -83,7 +92,7 @@ class _ProductDetailState extends State<ProductDetail> {
             child: Expanded(
               child: CarouselSlider(
                 items: [
-                  Image.asset(widget.data['image'] ?? ''),
+                  Image.asset(widget.image ?? ''),
                 ],
                 options: CarouselOptions(
                   autoPlay: true,
@@ -112,9 +121,9 @@ class _ProductDetailState extends State<ProductDetail> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(widget.data['title'] ?? '',
+                          Text(widget.title ?? '',
                               style: TextStyle(fontSize: 30)),
-                          Text(widget.data['subtitle'] ?? '',
+                          Text(widget.subtitle ?? '',
                               style:
                                   TextStyle(color: Colors.grey, fontSize: 20)),
                         ],
@@ -122,20 +131,26 @@ class _ProductDetailState extends State<ProductDetail> {
                     ),
                     IconButton(
                       onPressed: () async {
+                        isfavorite();
                         favoriteItems.add({
-                          'title': widget.data['title'],
-                          'subtitle': widget.data['subtitle'],
-                          'price': widget.data['price'],
-                          'image': widget.data['image'],
+                          'title': widget.title ?? '',
+                          'subtitle': widget.subtitle ?? '',
+                          'price': widget.price?? '',
+                          'image': widget.image ?? '',
                         });
-                        await savefavstate(widget.data); // Save updated state
+                        await savefavstate(Map()); 
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                               content: Text(
-                                  "${widget.data['title']} added to favorite")),
+                                  "${widget.title} added to favorite")),
                         );
                       },
-                      icon: Icon(Icons.favorite_border, color: Colors.grey),
+                      icon: Icon(
+                        favorite ? Icons.favorite : Icons.favorite_border,
+                        color: favorite ? Colors.green : Colors.grey,
+                        
+                      ),
+                      
                     ),
                   ],
                 ),
@@ -216,7 +231,7 @@ class _ProductDetailState extends State<ProductDetail> {
                   ],
                 ),
                 Text(
-                  widget.data['description'] ?? 'S',
+                  widget.Description ?? 'S',
                   style: TextStyle(fontSize: 17),
                 ),
                 SizedBox(

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class Favourite extends StatefulWidget {
 
 class _FavouriteState extends State<Favourite> {
   List<Map<String, String>> favItems = [];
+  List<int> quantity = [];
 
   @override
   void initState() {
@@ -19,18 +21,17 @@ class _FavouriteState extends State<Favourite> {
     getfavProducts();
   }
 
-  // Fetch the favorite products from shared preferences
   Future<void> getfavProducts() async {
     SharedPreferences pres = await SharedPreferences.getInstance();
     List<String> savedProducts = pres.getStringList("favProducts") ?? [];
     setState(() {
       favItems = savedProducts
-          .map((productJson) => Map<String, String>.from(jsonDecode(productJson)))
+          .map((productJson) =>
+              Map<String, String>.from(jsonDecode(productJson)))
           .toList();
     });
   }
 
-  // Save the updated favorite products to shared preferences
   Future<void> savefavState() async {
     SharedPreferences pres = await SharedPreferences.getInstance();
     List<String> updatedProducts =
@@ -38,76 +39,82 @@ class _FavouriteState extends State<Favourite> {
     await pres.setStringList("favProducts", updatedProducts);
   }
 
-  // Remove item from the favorite list
-  Future<void> removeItemFromFav(int index) async {
-    SharedPreferences pres = await SharedPreferences.getInstance();
+  Future<void> removeItemFromCart(int index) async {
     setState(() {
       favItems.removeAt(index);
     });
-    await savefavState(); // Update the favorite list in SharedPreferences
+    savefavState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.green,
-        title: Text('Favorites'),
-        centerTitle: true,
-      ),
       body: Padding(
-        padding: const EdgeInsets.only(top: 20),
+        padding: EdgeInsets.only(top: 50),
         child: Column(
           children: [
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                'favorite',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
             Divider(),
             Expanded(
               child: favItems.isEmpty
-                  ? Center(child: Text('Your favorites list is empty'))
+                  ? Center(child: Text('Your fav is empty'))
                   : ListView.builder(
                       itemCount: favItems.length,
                       itemBuilder: (context, index) {
                         final item = favItems[index];
                         return Card(
                           margin: EdgeInsets.symmetric(
-                            vertical: 5,
+                    
                             horizontal: 10,
                           ),
                           child: ListTile(
                             leading: Image.asset(
-                              item["image"] ?? 'assets/default_image.png', // Fallback image if missing
-                              width: 80,
-                              height: 80,
+                              item["image"] ?? '',
+                                 fit: BoxFit.cover,
+                              width: 60,
+                            
                             ),
                             title: Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: Text(
-                                item["name"] ?? "Unnamed Product",
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              padding: const EdgeInsets.only(top: 0),
+                              child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    item["title"] ?? "Unnamed Product",
+                                    style: TextStyle(
+                                        fontSize: 16, fontWeight: FontWeight.bold),
+                                  ),
+                                ],
                               ),
                             ),
                             subtitle: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Quantity: ${item["quantity"] ?? "N/A"}',
+                                  item["subtitle"] ?? "N\A",
                                   style: TextStyle(
                                       fontSize: 14, color: Colors.grey),
                                 ),
                               ],
                             ),
-                            trailing: Column(
-                              children: [
-                                IconButton(
-                                  icon: Icon(Icons.delete, color: Colors.red),
-                                  onPressed: () => removeItemFromFav(index),
-                                ),
-                                Text(
-                                  '\$${item["price"] ?? "0.00"}',
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                              ],
-                            ),
+                            trailing: Column(children: [
+                              IconButton(
+                                icon: Icon(Icons.delete, color: Colors.red),
+                                onPressed: () => removeItemFromCart(index),
+                              ),
+                              Text(
+                                item["price"] ?? "Unnamed price",
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ]),
                             visualDensity: VisualDensity(vertical: 4),
                           ),
                         );
@@ -127,7 +134,6 @@ class _FavouriteState extends State<Favourite> {
                 ),
                 onPressed: () {
                   // Navigate to the checkout page
-                  // You can implement this functionality as needed
                 },
                 child: Text(
                   'Add All To Cart',

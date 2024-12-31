@@ -53,28 +53,28 @@ class _HomeScreenState extends State<HomeScreen> {
     {
       "image": "assets/image/92f1ea7dcce3b5d06cd1b1418f9b9413 3.png",
       "name": "Bell Pepper",
-      "quantity": "2Kg",
+      "size": "2Kg",
       "price": "\$7.99",
       "Description": ""
     },
     {
       "image": "assets/image/pngfuel 3.png",
       "name": "Ginger",
-      "quantity": "1kg",
+      "size": "1kg",
       "price": "\$4.99",
       "Description": ""
     },
     {
       "image": "assets/image/pngegg (4).png",
       "name": "Carrot",
-      "quantity": "30gm",
+      "size": "30gm",
       "price": "\$5.99",
       "Description": ""
     },
     {
       "image": "assets/image/pngegg (5).png",
       "name": "Potato",
-      "quantity": "2kg",
+      "size": "2kg",
       "price": "\$4.99",
       "Description": ""
     },
@@ -199,7 +199,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               fruit["description"] ?? '',
                                           title: fruit["name"] ?? '',
                                           subtitle: fruit["size"] ?? '',
-                                          data: {},
+                                          // data: {},
                                         ),
                                       ));
                                 },
@@ -315,7 +315,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                           Description: veg["description"] ?? '',
                                           title: veg["name"] ?? '',
                                           subtitle: veg["size"] ?? '',
-                                          data: {},
+                                          // data: {
+
+                                          // },
                                         ),
                                       ));
                                 },
@@ -344,7 +346,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               style: TextStyle(fontSize: 20),
                                             ),
                                             Text(
-                                              veg["quantity"]!,
+                                              veg["size"]!,
                                               style: TextStyle(
                                                   color: Colors.grey,
                                                   fontSize: 17),
