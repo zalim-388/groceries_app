@@ -11,44 +11,95 @@ class _AccountState extends State<Account> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.green.shade400,
-          leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-              )),
-        ),
-        backgroundColor: Colors.green.shade800,
+        backgroundColor: Colors.black,
         body: Column(
           children: [
             Stack(
               children: [
                 Container(
-                  height: 250,
+                  height: 300,
                   width: 420,
                   decoration: BoxDecoration(
                     color: Colors.green.shade400,
                   ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 350),
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 200),
+                      child: IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                          )),
+                    ),
+                  ),
                 ),
                 Positioned(
-                    left: 150,
-                    top: 60,
-                    child: CircleAvatar(
-                      backgroundColor: Colors.white,
-                      radius: 50,
-                      child: Icon(
-                        Icons.person,
-                        size: 50,
-                        color: Colors.green,
-                      ),
+                    right: 30,
+                    top: 100,
+                    child: Column(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: Colors.white,
+                          radius: 50,
+                          child: Icon(
+                            Icons.person,
+                            size: 50,
+                            color: Colors.green,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              height: 60,
+                              width: 160,
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20))),
+                              child: IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.share,
+                                    color: Colors.white,
+                                  )),
+                            ),
+                            SizedBox(
+                              width: 40,
+                            ),
+                            Container(
+                              height: 60,
+                              width: 160,
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20))),
+                              child: Column(
+                                children: [
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.share,
+                                        color: Colors.white,
+                                        
+                                      )),
+                                      
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
                     )),
                 Positioned(
-                  left: 200,
-                  top: 130,
+                  left: 220,
+                  top: 160,
                   child: CircleAvatar(
                       backgroundColor: Colors.white,
                       radius: 20,
@@ -71,17 +122,6 @@ class _AccountState extends State<Account> {
                 ),
               ],
             ),
-            Row(
-              children: [
-                Container(
-                  height: 50,
-                  width: 50,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
-                )
-              ],
-            )
           ],
         ));
   }
