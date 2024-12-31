@@ -1,15 +1,16 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class Mycart extends StatefulWidget {
-  Mycart({super.key});
+class MyCart extends StatefulWidget {
+  MyCart({super.key});
 
   @override
   State<MyCart> createState() => _MyCartState();
 }
 
-class _MycartState extends State<Mycart> {
+class _MyCartState extends State<MyCart> {
   List<Map<String, String>> cartItems = [];
   List<int> quantity = [];
 
@@ -73,7 +74,7 @@ class _MycartState extends State<Mycart> {
 
   @override
   Widget build(BuildContext context) {
-    print("Building widget with cart items: $cartItems");
+    
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.only(top: 50),
@@ -120,7 +121,7 @@ class _MycartState extends State<Mycart> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  item["quantity"]! ?? "N\A",
+                                  item["quantity"] ?? "N\A",
                                   style: TextStyle(
                                       fontSize: 14, color: Colors.grey),
                                 ),
@@ -150,7 +151,7 @@ class _MycartState extends State<Mycart> {
                                 onPressed: () => removeItemFromCart(index),
                               ),
                               Text(
-                                item["price"]! ?? "Unnamed price",
+                                item["price"] ?? "Unnamed price",
                                 style: TextStyle(fontSize: 16),
                               ),
                             ]),

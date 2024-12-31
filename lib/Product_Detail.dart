@@ -10,6 +10,11 @@ class ProductDetail extends StatefulWidget {
   const ProductDetail({
     super.key,
     required this.data,
+    required String image,
+    required String price,
+    required String Description,
+    required String title,
+    required String subtitle,
   });
 
   @override
@@ -75,26 +80,20 @@ class _ProductDetailState extends State<ProductDetail> {
                   bottomRight: Radius.circular(30)),
               color: Colors.grey.shade200,
             ),
-            child: Container(
-              height: 200,
-              width: double.infinity,
-              child: Expanded(
-                child: CarouselSlider(
-                  items: [
-                    Image.asset(widget.data['image']??''),
-                    Image.asset(widget.data['image']??''),
-                  ],
-                  carouselController: _controller,
-                  options: CarouselOptions(
-                    autoPlay: true,
-                    enlargeCenterPage: true,
-                    aspectRatio: 1.0,
-                    onPageChanged: (index, reason) {
-                      setState(() {
-                        _current = index;
-                      });
-                    },
-                  ),
+            child: Expanded(
+              child: CarouselSlider(
+                items: [
+                  Image.asset(widget.data['image'] ?? ''),
+                ],
+                options: CarouselOptions(
+                  autoPlay: true,
+                  enlargeCenterPage: true,
+                  aspectRatio: 1.0,
+                  onPageChanged: (index, reason) {
+                    setState(() {
+                      _current = index;
+                    });
+                  },
                 ),
               ),
             ),
@@ -109,43 +108,34 @@ class _ProductDetailState extends State<ProductDetail> {
               children: [
                 Row(
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.data['name']??'',
-                          style: TextStyle(fontSize: 30),
-                        ),
-                        Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              widget.data['size']??'',
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(widget.data['title'] ?? '',
+                              style: TextStyle(fontSize: 30)),
+                          Text(widget.data['subtitle'] ?? '',
                               style:
-                                  TextStyle(color: Colors.grey, fontSize: 20),
-                            )),
-                      ],
+                                  TextStyle(color: Colors.grey, fontSize: 20)),
+                        ],
+                      ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 200),
-                      child: IconButton(
-                          onPressed: () async {
-                            favoriteItems.add(
-                              {
-                                'title': widget.data['title'],
-                                'subtitle': widget.data['subtitle'],
-                                'price': widget.data['price'],
-                                'image': widget.data['image'],
-                              },
-                            );
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                  content: Text("${widget.data['name']} add to favorite")),
-                            );
-                          },
-                          icon: Icon(
-                            Icons.favorite_border,
-                            color: Colors.grey,
-                          )),
+                    IconButton(
+                      onPressed: () async {
+                        favoriteItems.add({
+                          'title': widget.data['title'],
+                          'subtitle': widget.data['subtitle'],
+                          'price': widget.data['price'],
+                          'image': widget.data['image'],
+                        });
+                        await savefavstate(widget.data); // Save updated state
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                              content: Text(
+                                  "${widget.data['title']} added to favorite")),
+                        );
+                      },
+                      icon: Icon(Icons.favorite_border, color: Colors.grey),
                     ),
                   ],
                 ),
@@ -226,7 +216,7 @@ class _ProductDetailState extends State<ProductDetail> {
                   ],
                 ),
                 Text(
-                  widget.data['description']??'S',
+                  widget.data['description'] ?? 'S',
                   style: TextStyle(fontSize: 17),
                 ),
                 SizedBox(

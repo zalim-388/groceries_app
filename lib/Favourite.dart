@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -12,8 +11,7 @@ class Favourite extends StatefulWidget {
 }
 
 class _FavouriteState extends State<Favourite> {
- List<Map<String, String>> favItems = [];
-  List<int> quantity = [];
+  List<Map<String, String>> favItems = [];
 
   @override
   void initState() {
@@ -21,79 +19,50 @@ class _FavouriteState extends State<Favourite> {
     getfavProducts();
   }
 
-  void initializeQuantities() {
-    quantity = favItems
-        .map((item) => int.tryParse(item["quantity"] ?? "1") ?? 1)
-        .toList();
-  }
-
-  void increment(int index) {
-    setState(() {
-      quantity[index]++;
-      favItems[index]["quantity"] = quantity[index].toString();
-    });
-    savefavState();
-  }
-
-  void decrement(int index) {
-    if (quantity[index] > 1) {
-      setState(() {
-        quantity[index]--;
-        favItems[index]["quantity"] = quantity[index].toString();
-      });
-      savefavState();
-    }
-  }
-
+  // Fetch the favorite products from shared preferences
   Future<void> getfavProducts() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> savedProducts = prefs.getStringList("favProducts") ?? [];
+    SharedPreferences pres = await SharedPreferences.getInstance();
+    List<String> savedProducts = pres.getStringList("favProducts") ?? [];
     setState(() {
       favItems = savedProducts
-          .map((productJson) =>
-              Map<String, String>.from(jsonDecode(productJson)))
+          .map((productJson) => Map<String, String>.from(jsonDecode(productJson)))
           .toList();
-      initializeQuantities();
     });
   }
 
+  // Save the updated favorite products to shared preferences
   Future<void> savefavState() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    SharedPreferences pres = await SharedPreferences.getInstance();
     List<String> updatedProducts =
-       favItems.map((item) => jsonEncode(item)).toList();
-    await prefs.setStringList("favProducts", updatedProducts);
+        favItems.map((item) => jsonEncode(item)).toList();
+    await pres.setStringList("favProducts", updatedProducts);
   }
 
-  Future<void> removeItemFromCart(int index) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+  // Remove item from the favorite list
+  Future<void> removeItemFromFav(int index) async {
+    SharedPreferences pres = await SharedPreferences.getInstance();
     setState(() {
       favItems.removeAt(index);
     });
-    savefavState();
+    await savefavState(); // Update the favorite list in SharedPreferences
   }
 
   @override
   Widget build(BuildContext context) {
-    print("Building widget with cart items: $favItems");
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+        title: Text('Favorites'),
+        centerTitle: true,
+      ),
       body: Padding(
-        padding: EdgeInsets.only(top: 50),
+        padding: const EdgeInsets.only(top: 20),
         child: Column(
           children: [
-            Align(
-              alignment: Alignment.center,
-              child: Text(
-                'fav',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
             Divider(),
             Expanded(
               child: favItems.isEmpty
-                  ? Center(child: Text('Your fav is empty'))
+                  ? Center(child: Text('Your favorites list is empty'))
                   : ListView.builder(
                       itemCount: favItems.length,
                       itemBuilder: (context, index) {
@@ -105,12 +74,12 @@ class _FavouriteState extends State<Favourite> {
                           ),
                           child: ListTile(
                             leading: Image.asset(
-                              item["image"] ?? 'image illa..',
+                              item["image"] ?? 'assets/default_image.png', // Fallback image if missing
                               width: 80,
                               height: 80,
                             ),
                             title: Padding(
-                              padding: const EdgeInsets.only(top: 30),
+                              padding: const EdgeInsets.only(top: 10),
                               child: Text(
                                 item["name"] ?? "Unnamed Product",
                                 style: TextStyle(
@@ -121,40 +90,24 @@ class _FavouriteState extends State<Favourite> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  item["quantity"] ?? "N\A",
+                                  'Quantity: ${item["quantity"] ?? "N/A"}',
                                   style: TextStyle(
                                       fontSize: 14, color: Colors.grey),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 35),
-                                  child: Row(
-                                    children: [
-                                      IconButton(
-                                        onPressed: () => decrement(index),
-                                        icon: Icon(Icons.remove,
-                                            color: Colors.grey),
-                                      ),
-                                      Text('${quantity[index]}'),
-                                      IconButton(
-                                        onPressed: () => increment(index),
-                                        icon: Icon(Icons.add,
-                                            color: Colors.green),
-                                      ),
-                                    ],
-                                  ),
+                              ],
+                            ),
+                            trailing: Column(
+                              children: [
+                                IconButton(
+                                  icon: Icon(Icons.delete, color: Colors.red),
+                                  onPressed: () => removeItemFromFav(index),
+                                ),
+                                Text(
+                                  '\$${item["price"] ?? "0.00"}',
+                                  style: TextStyle(fontSize: 16),
                                 ),
                               ],
                             ),
-                            trailing: Column(children: [
-                              IconButton(
-                                icon: Icon(Icons.delete, color: Colors.red),
-                                onPressed: () => removeItemFromCart(index),
-                              ),
-                              Text(
-                                item["price"] ?? "Unnamed price",
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ]),
                             visualDensity: VisualDensity(vertical: 4),
                           ),
                         );
@@ -174,6 +127,7 @@ class _FavouriteState extends State<Favourite> {
                 ),
                 onPressed: () {
                   // Navigate to the checkout page
+                  // You can implement this functionality as needed
                 },
                 child: Text(
                   'Add All To Cart',

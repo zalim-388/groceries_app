@@ -9,46 +9,38 @@ class Explore extends StatefulWidget {
 }
 
 class _ExploreState extends State<Explore> {
-  // final List<Color> _prodcut_Color = [
-  //   Colors.green.shade100,
-  //   Colors.orange.shade100,
-  //   Colors.pink.shade100,
-  //   Colors.purple.shade100,
-  //   Colors.amber.shade100,
-  //   Colors.blue.shade100,
-  // ];
-  List<Map<String, String>> _filteredList = [];
+  List<Map<String, dynamic>> _filteredList = [];
 
-  final List<Map<String, String>> _prodcuts = [
+  final List<Map<String, dynamic>> _products = [
     {
       "image": "assets/image/pngfuel 6.png",
-      "name": "Frash Fruits\n& Vegetable",
-      "Color": Colors.green[100].toString()
+      "name": "Fresh Fruits\n& Vegetables",
+      "color": Colors.green[100],
     },
     {
       "image": "assets/image/pngfuel 8.png",
       "name": "Cooking Oil\n& Ghee",
-      "Color": Colors.orange[100].toString(),
+      "color": Colors.orange[100],
     },
     {
       "image": "assets/image/pngfuel 9.png",
       "name": "Meat & Fish",
-      "Color": Colors.pink[100].toString(),
+      "color": Colors.pink[100],
     },
     {
       "image": "assets/image/pngfuel 6 (1).png",
       "name": "Bakery & Snacks",
-      "Color": Colors.purple[100].toString(),
+      "color": Colors.purple[100],
     },
     {
       "image": "assets/image/pngfuel.png",
       "name": "Dairy & Eggs",
-      "Color": Colors.amber[100].toString(),
+      "color": Colors.amber[100],
     },
     {
       "image": "assets/image/pngfuel 6 (2).png",
       "name": "Beverages",
-      "Color": Colors.blue[100].toString(),
+      "color": Colors.blue[100],
     },
   ];
 
@@ -92,34 +84,25 @@ class _ExploreState extends State<Explore> {
       "price": "0.50"
     },
   ];
+
   final TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _filteredList = List.from(_prodcuts);
+    _filteredList = List.from(_products);
     _filteredDairyEggs = List.from(_DairEggs);
   }
 
   void _filterList(String query) {
     setState(() {
       _filteredList = query.isEmpty
-          ? List.from(_prodcuts)
+          ? List.from(_products)
           : _DairEggs.where((item) {
               return item["name"]!.toLowerCase().contains(query.toLowerCase());
             }).toList();
     });
   }
-
-  // void _filterDairyEggs(String query) {
-  //   setState(() {
-  //     _filteredDairyEggs = query.isEmpty
-  //         ? List.from(_DairEggs)
-  //         : _DairEggs.where((item) {
-  //             return item["name"]!.toLowerCase().contains(query.toLowerCase());
-  //           }).toList();
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -135,13 +118,13 @@ class _ExploreState extends State<Explore> {
             const SizedBox(height: 20),
             TextField(
               controller: _controller,
+              onChanged: _filterList,
               decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.search, color: Colors.grey),
                 suffixIcon: IconButton(
                   onPressed: () {
                     _controller.clear();
                     _filterList('');
-                    // _filterDairyEggs('');
                   },
                   icon: const Icon(Icons.clear_rounded),
                 ),
@@ -153,159 +136,173 @@ class _ExploreState extends State<Explore> {
                   borderSide: BorderSide.none,
                 ),
               ),
+            ),
+            if (_controller.text.isNotEmpty)
               Expanded(
                 child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 5,
                     mainAxisSpacing: 15,
                     childAspectRatio: 1,
                   ),
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  itemCount: _filteredDairyEggs.length,
-                  shrinkWrap: true,
+                  itemCount: _filteredList.length,
                   itemBuilder: (context, index) {
-                    final eggList = _filteredDairyEggs[index];
+                    final product = _filteredList[index];
+
                     return GestureDetector(
                       onTap: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Beverages(),
-                            ));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Beverages(),
+                          ),
+                        );
                       },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Container(
-                          width: 180,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Image.asset(
-                                eggList["image"]!,
-                                height: 80,
-                                width: 80,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: product["color"],
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: Colors.grey.shade300),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              product["image"] ?? '',
+                              height: 80,
+                              width: 80,
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              product["name"] ?? '',
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      eggList["name"]!,
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              product["quantity"] ?? '',
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 40),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    product["price"] ?? '',
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      fontSize: 16,
                                     ),
-                                    Text(
-                                      eggList["quantity"]!,
-                                      style: TextStyle(
-                                          color: Colors.grey, fontSize: 14),
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          eggList["price"]!,
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        SizedBox(
-                                          width: 60,
-                                        ),
-                                        Container(
-                                          height: 40,
-                                          width: 40,
-                                          decoration: BoxDecoration(
-                                              color: Colors.green,
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(15))),
-                                          child: IconButton(
-                                              onPressed: () {},
-                                              icon: Icon(
-                                                Icons.add,
-                                                color: Colors.white,
-                                              )),
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
+                                  ),
+                                  const SizedBox(
+                                    width: 50,
+                                  ),
+                                  Container(
+                                      height: 40,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                          color: Colors.green,
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                      child: const Icon(
+                                        Icons.add,
+                                        color: Colors.white,
+                                        size: 20,
+                                      )),
+                                ],
+                              ),
+                            )
+                          ],
                         ),
                       ),
                     );
                   },
                 ),
-              ),
-              // Padding(
-              //   padding: const EdgeInsets.only(top: 30),
-              //   child: SizedBox(
-              //     height: 600,
-              //     child: Expanded(
-              //       child: GridView.builder(
-              //         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              //           crossAxisCount: 2,
-              //           crossAxisSpacing: 15,
-              //           mainAxisSpacing: 15,
-              //           childAspectRatio: 1,
-              //         ),
-              //         physics: const AlwaysScrollableScrollPhysics(),
-              //         itemCount: _filteredList.length,
-              //         shrinkWrap: true,
-              //         itemBuilder: (context, index) {
-              //           return GestureDetector(
-              //             onTap: () {
-              //               Navigator.push(
-              //                   context,
-              //                   MaterialPageRoute(
-              //                     builder: (context) => Beverages(),
-              //                   ));
-              //             },
-              //             child: Container(
-              //               decoration: BoxDecoration(
-              //                 borderRadius:
-              //                     BorderRadius.all(Radius.circular(20)),
-              //                 // border: Border.all(color: prodcut_Color[index]),
-              //                 color: _prodcut_Color[index],
-              //               ),
-              //               child: Column(
-              //                 children: [
-              //                   SizedBox(
-              //                     height: 10,
-              //                   ),
-              //                   Image.asset(
-              //                     _Product_img[index],
-              //                     height: 80,
-              //                     width: 80,
-              //                   ),
-              //                   SizedBox(
-              //                     height: 20,
-              //                   ),
-              //                   Text(
-              //                     _prodcut_name[index],
-              //                     style: TextStyle(fontSize: 20),
-              //                   )
-              //                 ],
-              //               ),
-              //             ),
-              //           );
-              //         },
-              //       ),
-              //     ),
-              //   ),
-              // ),
-            ],
-          ),
+              )
+            else
+              Expanded(
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 15,
+                    childAspectRatio: 1,
+                  ),
+                  itemCount: _filteredList.length,
+                  itemBuilder: (context, index) {
+                    final product = _filteredList[index];
+
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Beverages(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: product["color"],
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: Colors.grey.shade300),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              product["image"] ?? '',
+                              height: 80,
+                              width: 80,
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              product["name"] ?? '',
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              product["quantity"] ?? '',
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 40),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    product["price"] ?? '',
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 50,
+                                  ),
+                                
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              )
+          ],
         ),
       ),
     );

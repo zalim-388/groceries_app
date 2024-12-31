@@ -75,8 +75,15 @@ class _BeveragesState extends State<Beverages> {
           "Fanta offers a delicious fruity flavor that's fun and refreshing.",
     }
   ];
-
-  bool? check = true;
+  bool? eggsChecked = false; // State for the "Eggs" checkbox
+  bool? noodlesChecked = false;
+  bool? Crispschecked = false;
+  bool? checkState = false;
+  bool? FastFoodChecked = false;
+  bool? Individualchecked = false;
+  bool ? CocolaChecked =false;
+  bool ? IfadChecked=false;
+  bool ? KaziFarmasChecked=false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,13 +107,15 @@ class _BeveragesState extends State<Beverages> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: IconButton(
-                onPressed: () {
-                  showModalBottomSheet(
-                    context: context,
-                    isScrollControlled: true,
-                    builder: (context) => Padding(
-                      padding: const EdgeInsets.only(top: 30),
-                      child: Container(
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  builder: (context) => Padding(
+                    padding: const EdgeInsets.only(top: 30),
+                    child: StatefulBuilder(builder: (BuildContext context,
+                        void Function(void Function()) setState) {
+                      return Container(
                         height: MediaQuery.of(context).size.height * 0.85,
                         alignment: Alignment.topLeft,
                         child: Column(
@@ -116,87 +125,244 @@ class _BeveragesState extends State<Beverages> {
                               child: Row(
                                 children: [
                                   IconButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      icon: Icon(
-                                        Icons.close,
-                                        color: Colors.black,
-                                        size: 30,
-                                      )),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 120),
-                                    child: Text(
-                                      'Filters',
-                                      style: TextStyle(
-                                          fontSize: 29,
-                                          fontWeight: FontWeight.w400),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    icon: Icon(
+                                      Icons.close,
+                                      color: Colors.black,
+                                      size: 30,
                                     ),
                                   ),
+                                  Spacer(),
+                                  Text(
+                                    'Filters',
+                                    style: TextStyle(
+                                      fontSize: 29,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  Spacer(flex: 2),
                                 ],
                               ),
                             ),
-                            SizedBox(
-                              height: 20,
-                            ),
+                            SizedBox(height: 20),
                             Container(
                               height: MediaQuery.of(context).size.height * 0.75,
                               decoration: BoxDecoration(
-                                  color: Colors.grey.shade200,
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(50),
-                                    topRight: Radius.circular(50),
-                                  )),
+                                color: Colors.grey.shade200,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(50),
+                                  topRight: Radius.circular(50),
+                                ),
+                              ),
                               alignment: Alignment.topLeft,
                               child: Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 25),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 20),
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        'Categories',
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: 20),
+                                    Align(alignment: Alignment.centerLeft,child: 
+                                    Text(
+                                      'Categories',
+                                      style: TextStyle(fontSize: 25),
+                                    ),
+                                    ),
+                                    SizedBox(height: 20),
+                                    Row(
+                                      children: [
+                                        Checkbox(
+                                          activeColor: Colors.green,
+                                          tristate:
+                                              false, // Use false for binary values
+                                          value: eggsChecked,
+                                          onChanged: (bool? value) {
+                                            setState(() {
+                                              // checkState =
+                                              //     value;
+                                              eggsChecked =
+                                                  value; // Update shared state
+                                            });
+                                          },
+                                        ),
+                                        SizedBox(width: 10),
+                                        Text(
+                                          'Eggs',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Checkbox(
+                                          activeColor: Colors.green,
+                                          tristate:
+                                              false, // Use false for binary values
+                                          value: noodlesChecked,
+                                          onChanged: (bool? value) {
+                                            setState(() {
+                                              // checkState =
+                                              //     value;
+                                              noodlesChecked = value;
+                                              // Update shared state
+                                            });
+                                          },
+                                        ),
+                                        SizedBox(width: 10),
+                                        Text(
+                                          'Noodles & Pasta',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Checkbox(
+                                            activeColor: Colors.green,
+                                            value: Crispschecked,
+                                            onChanged: (bool? value) {
+                                              setState(() {
+                                                Crispschecked = value;
+                                              });
+                                            }),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                          'Chips & Crisps',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Checkbox(
+                                          activeColor: Colors.green,
+                                            value: FastFoodChecked,
+                                            onChanged: (bool? value) {
+                                              setState(
+                                                () {
+                                                  FastFoodChecked = value;
+                                                },
+                                              );
+                                            }),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                          'Fast food',
+                                          style: TextStyle(fontSize: 16),
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        'Brand',
                                         style: TextStyle(fontSize: 25),
                                       ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Checkbox(
-                                            activeColor: Colors.green,
-                                              tristate: true,
-                                              value: check,
-                                              onChanged: (bool? value) {
-                                                setState(() {
-                                                  check = value;
-                                                });
-                                              }),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(
-                                            'Eggs',
-                                            style: TextStyle(fontSize: 16),
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Checkbox(
+                                          activeColor: Colors.green,
+                                            value: Individualchecked,
+                                            onChanged: (bool? value) {
+                                              setState(
+                                                () {
+                                                  Individualchecked = value;
+                                                },
+                                              );
+                                            }),
+                                        SizedBox(width: 10),
+                                        Text(
+                                          'Individual Callection',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Checkbox(
+                                          activeColor: Colors.green,
+                                            value: CocolaChecked,
+                                            onChanged: (bool? value) {
+                                              setState(
+                                                () {
+                                                 CocolaChecked  = value;
+                                                },
+                                              );
+                                            }),
+                                        SizedBox(width: 10),
+                                        Text(
+                                          'Cocola',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Checkbox(
+                                          activeColor: Colors.green,
+                                            value: IfadChecked,
+                                            onChanged: (bool? value) {
+                                              setState(
+                                                () {
+                                                  IfadChecked = value;
+                                                },
+                                              );
+                                            }),
+                                        SizedBox(width: 10),
+                                        Text(
+                                          'Ifad',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Checkbox(
+                                          activeColor: Colors.green,
+                                            value: KaziFarmasChecked,
+                                            onChanged: (bool? value) {
+                                              setState(
+                                                () {
+                                                  KaziFarmasChecked = value;
+                                                },
+                                              );
+                                            }),
+                                        SizedBox(width: 10),
+                                        Text(
+                                          'Kazi Farmas',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                      ],
+                                    ),
+
+
+                                  ],
                                 ),
                               ),
                             ),
                           ],
                         ),
-                      ),
-                    ),
-                  );
-                },
-                icon: Icon(
-                  Icons.tune_outlined,
-                  size: 30,
-                )),
+                      );
+                    }),
+                  ),
+                );
+              },
+              icon: Icon(
+                Icons.tune_outlined,
+                size: 30,
+              ),
+            ),
           )
         ],
       ),
