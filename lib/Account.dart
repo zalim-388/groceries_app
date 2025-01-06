@@ -11,7 +11,7 @@ class _AccountState extends State<Account> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.green.shade200,
         body: Column(
           children: [
             Stack(
@@ -57,24 +57,33 @@ class _AccountState extends State<Account> {
                         Row(
                           children: [
                             Container(
-                              height: 60,
+                              height: 70,
                               width: 160,
                               decoration: BoxDecoration(
                                   border: Border.all(color: Colors.grey),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20))),
-                              child: IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.share,
-                                    color: Colors.white,
-                                  )),
+                              child: Column(
+                                children: [
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.search,
+                                        color: Colors.white,
+                                      )),
+                                  Text(
+                                    'Search',
+                                    style: TextStyle(
+                                        fontSize: 17, color: Colors.white),
+                                  )
+                                ],
+                              ),
                             ),
                             SizedBox(
                               width: 40,
                             ),
                             Container(
-                              height: 60,
+                              height: 70,
                               width: 160,
                               decoration: BoxDecoration(
                                   border: Border.all(color: Colors.grey),
@@ -87,9 +96,12 @@ class _AccountState extends State<Account> {
                                       icon: Icon(
                                         Icons.share,
                                         color: Colors.white,
-                                        
                                       )),
-                                      
+                                  Text(
+                                    'share',
+                                    style: TextStyle(
+                                        fontSize: 17, color: Colors.white),
+                                  )
                                 ],
                               ),
                             )
@@ -122,6 +134,22 @@ class _AccountState extends State<Account> {
                 ),
               ],
             ),
+            Column(
+              children: [
+                Container( 
+                  child:
+                   Row(
+                    children: [
+                      Icon(
+                        Icons.person_2_outlined,
+                        size: 25,
+                      ),
+                    ],
+                  ),
+
+                )
+              ],
+            )
           ],
         ));
   }
