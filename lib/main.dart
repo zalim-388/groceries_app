@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:groceries_app/provider.dart';
 import 'package:groceries_app/splash_Screen.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp( MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -17,12 +19,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      size = MediaQuery.of(context).size; 
+    size = MediaQuery.of(context).size;
     height = size.height;
     width = size.width;
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+    return ChangeNotifierProvider(
+      create: (context) => name(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: SplashScreen(),
+      ),
     );
   }
 }

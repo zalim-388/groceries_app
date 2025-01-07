@@ -1,6 +1,6 @@
 import 'package:bottom_bar_matu/bottom_bar_matu.dart';
 import 'package:flutter/material.dart';
-import 'package:groceries_app/Account.dart';
+import 'package:groceries_app/profile.dart';
 import 'package:groceries_app/Explore.dart';
 import 'package:groceries_app/Favourite.dart';
 import 'package:groceries_app/Home_Screen.dart';
