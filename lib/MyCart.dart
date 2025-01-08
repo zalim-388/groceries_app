@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:groceries_app/order_accepted.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyCart extends StatefulWidget {
@@ -74,7 +75,6 @@ class _MyCartState extends State<MyCart> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.only(top: 50),
@@ -173,11 +173,213 @@ class _MyCartState extends State<MyCart> {
                   ),
                 ),
                 onPressed: () {
-                  // Navigate to the checkout page
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (BuildContext context) {
+                      return Container(
+                        height: MediaQuery.of(context).size.height * 0.55,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        'Checkout',
+                                        style: TextStyle(fontSize: 25),
+                                      )),
+                                  SizedBox(
+                                    width: 230,
+                                  ),
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.close,
+                                        size: 30,
+                                      )),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Divider(),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    'Delivery',
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 20),
+                                  ),
+                                  SizedBox(
+                                    width: 160,
+                                  ),
+                                  Text(
+                                    'select method',
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.arrow_forward_ios_outlined,
+                                        size: 25,
+                                      ))
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Divider(),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    'Payment',
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.grey),
+                                  ),
+                                  SizedBox(
+                                    width: 250,
+                                  ),
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.arrow_forward_ios_outlined,
+                                        size: 25,
+                                      )),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Divider(),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    'Promo Code',
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.grey),
+                                  ),
+                                  SizedBox(
+                                    width: 120,
+                                  ),
+                                  Text(
+                                    'Pick discount ',
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.arrow_forward_ios_outlined,
+                                        size: 25,
+                                      ))
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Divider(),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    'Total Cost',
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.grey),
+                                  ),
+                                  SizedBox(
+                                    width: 190,
+                                  ),
+                                  Text(
+                                    '\$13.97',
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.arrow_forward_ios_outlined,
+                                        size: 25,
+                                      ))
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Divider(),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              RichText(
+                                text: TextSpan(
+                                    text:
+                                        'By placing an order you agree to our',
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                    ),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                          text: 'Terms',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black)),
+                                      TextSpan(
+                                          text: 'And',
+                                          style: TextStyle(
+                                            color: Colors.grey,
+                                          )),
+                                      TextSpan(
+                                          text: 'Conditions',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black))
+                                    ]),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              GestureDetector(onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => OrderAccepted(),));
+                              },
+                                child: Container(
+                                  height: 70,
+                                  width: 300,
+                                  decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(20))),alignment: Alignment.center,
+                                  child: 
+                                  Text(
+                                    'Place Order',
+                                    style: TextStyle(color: Colors.white,fontSize: 20),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
                 },
                 child: Text(
                   'Go to Checkout',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
                 ),
               ),
             ),

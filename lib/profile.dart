@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:groceries_app/onbording.dart';
 import 'package:groceries_app/provider.dart';
 import 'package:provider/provider.dart';
 
@@ -25,10 +26,10 @@ class _AccountState extends State<Account> {
           Stack(
             children: [
               Container(
-                height: 300,
+                height: 380,
                 width: 420,
                 decoration: BoxDecoration(
-           color:  Colors.green,
+                  color: Colors.green,
                 ),
                 child: Padding(
                   padding: const EdgeInsets.only(right: 350),
@@ -59,16 +60,41 @@ class _AccountState extends State<Account> {
                           color: Colors.green,
                         ),
                       ),
+                      Container(
+                        child: SimpleDialogOption(
+                          onPressed: () {
+                            opendilog(context, nameController);
+                          },
+                          child: Row(
+                            children: [
+                              Text(
+                                'Name :',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                              Consumer<name>(
+                                builder: (context, model, child) {
+                                  return Text(
+                                    model.userName ?? "Enter your name",
+                                    style: TextStyle(
+                                        fontSize: 18, color: Colors.black),
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                       SizedBox(
                         height: 20,
                       ),
                       Row(
                         children: [
                           Container(
-                            height: 70,
+                            height: 80,
                             width: 160,
                             decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
+                                border: Border.all(color: Colors.white),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20))),
                             child: Column(
@@ -91,10 +117,10 @@ class _AccountState extends State<Account> {
                             width: 40,
                           ),
                           Container(
-                            height: 70,
-                            width: 160,
+                            height: 80,
+                            width: 170,
                             decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
+                                border: Border.all(color: Colors.white),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20))),
                             child: Column(
@@ -113,14 +139,13 @@ class _AccountState extends State<Account> {
                               ],
                             ),
                           ),
-                          
                         ],
                       ),
                     ],
                   )),
               Positioned(
                 left: 220,
-                top: 160,
+                top: 170,
                 child: CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: 20,
@@ -144,46 +169,324 @@ class _AccountState extends State<Account> {
             ],
           ),
           const SizedBox(
-            height: 20,
+            height:10,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 25),
             child: Column(
               children: [
-                Container(
-                  child: SimpleDialogOption(
-                    onPressed: () {
-                      opendilog(context, nameController);
-                    },
+                Divider(),
+                SizedBox(
+                  height: 10,
+                ),
+                IntrinsicHeight(
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
-                        Icon(
-                          Icons.person_2_outlined,color: Colors.white,
-                          size: 35,
+                        Column(
+                          children: [
+                            IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.person_2_outlined,
+                                  color: Colors.white,
+                                  size: 35,
+                                )),
+
+                                Text('Name',style: TextStyle(fontSize: 17,color: Colors.white),)
+                          ],
                         ),
-                        Consumer<name>(
-                          builder: (context, model, child) {
-                            return Text(
-                              model.userName ?? "Enter your name",
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.black),
-                            );
-                          },
+                        SizedBox(
+                          width: 15,
+                        ),
+                        VerticalDivider(),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        Column(
+                          children: [
+                            IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.location_on_outlined,
+                                  color: Colors.white,
+                                  size: 35,
+                                )),
+                                Text('Address',style: TextStyle(fontSize: 17,color: Colors.white),)
+                          ],
+                        ),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        VerticalDivider(),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        Column(
+                          children: [
+                            IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.favorite,
+                                  color: Colors.white,
+                                )),
+
+                                Text('Wishlist',style: TextStyle(fontSize: 17,color: Colors.white),)
+                          ],
+                        ),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        VerticalDivider(),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        Column(
+                          children: [
+                            IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.notifications_outlined,
+                                  color: Colors.white,
+                                  size: 35,
+                                )),
+
+                                Text('Notification',style: TextStyle(fontSize: 17,color: Colors.white),)
+                          ],
+                        ),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        VerticalDivider(),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        Column(
+                          children: [
+                            IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.payment_outlined,
+                                  color: Colors.white,
+                                  size: 35,
+                                )),
+                                Text('payment',style: TextStyle(fontSize: 17,color: Colors.white),)
+                          ],
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        VerticalDivider(),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          children: [
+                            IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.error_outline,
+                                  color: Colors.white,
+                                  size: 35,
+                                )),
+
+                                Text('About',style: TextStyle(fontSize: 17,color: Colors.white),)
+                          ],
+                        ),
+                        SizedBox(
+                          width: 10,
                         ),
                       ],
                     ),
                   ),
                 ),
-SizedBox(height: 10,),
+                SizedBox(
+                  height: 25,
+                ),
+                Divider(),
+                SizedBox(
+                  height: 25,
+                ),
+                IntrinsicHeight(
+                  child: Row(
+                    children: [
+                      TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Edit profile',
+                            style: TextStyle(color: Colors.white, fontSize: 25),
+                          )),
+                      SizedBox(
+                        width: 40,
+                      ),
+                      VerticalDivider(),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Order History',
+                            style: TextStyle(fontSize: 25, color: Colors.white),
+                          )),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Divider(),
+                SizedBox(
+                  height: 10,
+                ),
+                IntrinsicHeight(
+                  child: Row(
+                    children: [
+                      TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Order List',
+                            style: TextStyle(color: Colors.white, fontSize: 25),
+                          )),
+                      SizedBox(
+                        width: 50,
+                      ),
+                      VerticalDivider(),
+                      SizedBox(
+                        width: 40,
+                      ),
+                      TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Settings',
+                            style: TextStyle(fontSize: 25, color: Colors.white),
+                          )),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Divider(),
+                SizedBox(
+                  height: 40,
+                ),
+                Row(
+                  children: [
+                    Column(
+                      children: [
+                        IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.wallet_outlined,
+                              size: 50,
+                              color: Colors.white,
+                            )),
 
-
-
-
-
-
-
-
-
+                            Text('Wallet',style: TextStyle(color: Colors.white,fontSize: 15),)
+                      ],
+                    ),
+                    SizedBox(
+                      width: 80,
+                    ),
+                    Column(
+                      children: [
+                        IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.help_outline_outlined,
+                              size: 50,
+                              color: Colors.white,
+                            )),
+                        Text(
+                          'help',
+                          style: TextStyle(color: Colors.white, fontSize: 15),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      width: 80,
+                    ),
+                    Column(
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => SimpleDialog(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'Log Out ?.',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 25),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 25,
+                                    ),
+                                    Align(
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          'Are you sure u want\n       to log out ? ',
+                                          style: TextStyle(fontSize: 18),
+                                        )),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 30),
+                                      child: Row(
+                                        children: [
+                                          ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: Text(
+                                                'Cancel',
+                                                style: TextStyle(
+                                                    color: Colors.black),
+                                              )),
+                                          SizedBox(
+                                            width: 50,
+                                          ),
+                                          ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.green),
+                                            onPressed: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        Onbording(),
+                                                  ));
+                                            },
+                                            child: Text(
+                                              "Log out",
+                                              style: TextStyle(
+                                                  color: Colors.black),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              );
+                            },
+                            icon: Icon(
+                              Icons.logout_outlined,
+                              size: 50,
+                              color: Colors.white,
+                            )),
+                        Text(
+                          'logout',
+                          style: TextStyle(color: Colors.white, fontSize: 15),
+                        )
+                      ],
+                    ),
+                  ],
+                )
               ],
             ),
           )
