@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:groceries_app/Favourite.dart';
+import 'package:groceries_app/MyCart.dart';
 import 'package:groceries_app/onbording.dart';
 import 'package:groceries_app/provider.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +14,13 @@ class Account extends StatefulWidget {
 
 class _AccountState extends State<Account> {
   final TextEditingController nameController = TextEditingController();
+  bool isdarkmode = false;
+
+  void toggletheme() {
+    setState(() {
+      isdarkmode = !isdarkmode;
+    });
+  }
 
   @override
   void dispose() {
@@ -20,13 +29,22 @@ class _AccountState extends State<Account> {
   }
 
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.green,
-        body: Column(children: [
-          Stack(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: isdarkmode
+          ? ThemeData.dark()
+          : ThemeData.light().copyWith(
+              primaryColor: Colors.green,
+              scaffoldBackgroundColor: Colors.green,
+            ),
+      home: Scaffold(
+          // backgroundColor: Colors.green,
+          body: SingleChildScrollView(
+            child: Column(children: [
+                    Stack(
             children: [
               Container(
-                height: 380,
+                height: 250,
                 width: 420,
                 decoration: BoxDecoration(
                   color: Colors.green,
@@ -47,7 +65,7 @@ class _AccountState extends State<Account> {
                 ),
               ),
               Positioned(
-                  right: 30,
+                  left: 155,
                   top: 100,
                   child: Column(
                     children: [
@@ -69,8 +87,8 @@ class _AccountState extends State<Account> {
                             children: [
                               Text(
                                 'Name :',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
+                                style:
+                                    TextStyle(color: Colors.white, fontSize: 20),
                               ),
                               Consumer<name>(
                                 builder: (context, model, child) {
@@ -87,59 +105,6 @@ class _AccountState extends State<Account> {
                       ),
                       SizedBox(
                         height: 20,
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            height: 80,
-                            width: 160,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20))),
-                            child: Column(
-                              children: [
-                                IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.search,
-                                      color: Colors.white,
-                                    )),
-                                Text(
-                                  'Search',
-                                  style: TextStyle(
-                                      fontSize: 17, color: Colors.white),
-                                )
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: 40,
-                          ),
-                          Container(
-                            height: 80,
-                            width: 170,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20))),
-                            child: Column(
-                              children: [
-                                IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.share,
-                                      color: Colors.white,
-                                    )),
-                                Text(
-                                  'share',
-                                  style: TextStyle(
-                                      fontSize: 17, color: Colors.white),
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
                       ),
                     ],
                   )),
@@ -167,14 +132,66 @@ class _AccountState extends State<Account> {
                     )),
               ),
             ],
-          ),
-          const SizedBox(
-            height:10,
-          ),
-          Padding(
+                    ),
+                    const SizedBox(
+            height: 10,
+                    ),
+                    Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: Column(
               children: [
+                Row(
+                  children: [
+                    Container(
+                      height: 80,
+                      width: 160,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white),
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: Column(
+                        children: [
+                          IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.search,
+                                color: Colors.white,
+                              )),
+                          Text(
+                            'Search',
+                            style: TextStyle(fontSize: 17, color: Colors.white),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: 40,
+                    ),
+                    Container(
+                      height: 80,
+                      width: 170,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white),
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: Column(
+                        children: [
+                          IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.share,
+                                color: Colors.white,
+                              )),
+                          Text(
+                            'share',
+                            style: TextStyle(fontSize: 17, color: Colors.white),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 Divider(),
                 SizedBox(
                   height: 10,
@@ -187,14 +204,16 @@ class _AccountState extends State<Account> {
                         Column(
                           children: [
                             IconButton(
-                                onPressed: () {},
+                                onPressed: toggletheme,
                                 icon: Icon(
-                                  Icons.person_2_outlined,
-                                  color: Colors.white,
+                                  Icons.dark_mode_outlined,
+                                  color: isdarkmode ? Colors.green : Colors.black,
                                   size: 35,
                                 )),
-
-                                Text('Name',style: TextStyle(fontSize: 17,color: Colors.white),)
+                            Text(
+                              'dark mode',
+                              style: TextStyle(fontSize: 17, color: Colors.white),
+                            )
                           ],
                         ),
                         SizedBox(
@@ -213,7 +232,10 @@ class _AccountState extends State<Account> {
                                   color: Colors.white,
                                   size: 35,
                                 )),
-                                Text('Address',style: TextStyle(fontSize: 17,color: Colors.white),)
+                            Text(
+                              'Address',
+                              style: TextStyle(fontSize: 17, color: Colors.white),
+                            )
                           ],
                         ),
                         SizedBox(
@@ -226,13 +248,17 @@ class _AccountState extends State<Account> {
                         Column(
                           children: [
                             IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => Favourite(),));
+                                },
                                 icon: Icon(
-                                  Icons.favorite,
+                                  Icons.favorite_border_outlined,
                                   color: Colors.white,
                                 )),
-
-                                Text('Wishlist',style: TextStyle(fontSize: 17,color: Colors.white),)
+                            Text(
+                              'Wishlist',
+                              style: TextStyle(fontSize: 17, color: Colors.white),
+                            )
                           ],
                         ),
                         SizedBox(
@@ -251,8 +277,10 @@ class _AccountState extends State<Account> {
                                   color: Colors.white,
                                   size: 35,
                                 )),
-
-                                Text('Notification',style: TextStyle(fontSize: 17,color: Colors.white),)
+                            Text(
+                              'Notification',
+                              style: TextStyle(fontSize: 17, color: Colors.white),
+                            )
                           ],
                         ),
                         SizedBox(
@@ -271,7 +299,10 @@ class _AccountState extends State<Account> {
                                   color: Colors.white,
                                   size: 35,
                                 )),
-                                Text('payment',style: TextStyle(fontSize: 17,color: Colors.white),)
+                            Text(
+                              'payment',
+                              style: TextStyle(fontSize: 17, color: Colors.white),
+                            )
                           ],
                         ),
                         SizedBox(
@@ -284,14 +315,18 @@ class _AccountState extends State<Account> {
                         Column(
                           children: [
                             IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => MyCart(),));
+                                },
                                 icon: Icon(
-                                  Icons.error_outline,
+                                  Icons.shopping_cart_outlined,
                                   color: Colors.white,
                                   size: 35,
                                 )),
-
-                                Text('About',style: TextStyle(fontSize: 17,color: Colors.white),)
+                            Text(
+                              'Cart',
+                              style: TextStyle(fontSize: 17, color: Colors.white),
+                            )
                           ],
                         ),
                         SizedBox(
@@ -383,8 +418,10 @@ class _AccountState extends State<Account> {
                               size: 50,
                               color: Colors.white,
                             )),
-
-                            Text('Wallet',style: TextStyle(color: Colors.white,fontSize: 15),)
+                        Text(
+                          'Wallet',
+                          style: TextStyle(color: Colors.white, fontSize: 15),
+                        )
                       ],
                     ),
                     SizedBox(
@@ -463,8 +500,8 @@ class _AccountState extends State<Account> {
                                             },
                                             child: Text(
                                               "Log out",
-                                              style: TextStyle(
-                                                  color: Colors.black),
+                                              style:
+                                                  TextStyle(color: Colors.black),
                                             ),
                                           )
                                         ],
@@ -489,8 +526,10 @@ class _AccountState extends State<Account> {
                 )
               ],
             ),
-          )
-        ]));
+                    )
+                  ]),
+          )),
+    );
   }
 }
 
