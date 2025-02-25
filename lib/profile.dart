@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:groceries_app/Favourite.dart';
 import 'package:groceries_app/MyCart.dart';
 import 'package:groceries_app/onbording.dart';
@@ -104,7 +105,7 @@ class _AccountState extends State<Account> {
                         ),
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 20.h,
                       ),
                     ],
                   )),
@@ -120,7 +121,7 @@ class _AccountState extends State<Account> {
                     )),
               ),
               Positioned(
-                right: 30,
+                right: 30.r,
                 top: 100,
                 child: CircleAvatar(
                     backgroundColor: Colors.white,
@@ -133,8 +134,8 @@ class _AccountState extends State<Account> {
               ),
             ],
                     ),
-                    const SizedBox(
-            height: 10,
+                    SizedBox(
+            height: 10.h,
                     ),
                     Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -143,8 +144,8 @@ class _AccountState extends State<Account> {
                 Row(
                   children: [
                     Container(
-                      height: 80,
-                      width: 160,
+                      height: 80.h,
+                      width: 160.w,
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.white),
                           borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -164,11 +165,11 @@ class _AccountState extends State<Account> {
                       ),
                     ),
                     SizedBox(
-                      width: 40,
+                      width: 40.w,
                     ),
                     Container(
-                      height: 80,
-                      width: 170,
+                      height: 80.h,
+                      width: 170.w,
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.white),
                           borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -190,11 +191,11 @@ class _AccountState extends State<Account> {
                   ],
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 Divider(),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 IntrinsicHeight(
                   child: SingleChildScrollView(
@@ -217,11 +218,11 @@ class _AccountState extends State<Account> {
                           ],
                         ),
                         SizedBox(
-                          width: 15,
+                          width: 15.w,
                         ),
                         VerticalDivider(),
                         SizedBox(
-                          width: 15,
+                          width: 15.w,
                         ),
                         Column(
                           children: [
@@ -239,11 +240,11 @@ class _AccountState extends State<Account> {
                           ],
                         ),
                         SizedBox(
-                          width: 15,
+                          width: 15.w,
                         ),
                         VerticalDivider(),
                         SizedBox(
-                          width: 15,
+                          width: 15.w,
                         ),
                         Column(
                           children: [
@@ -262,11 +263,11 @@ class _AccountState extends State<Account> {
                           ],
                         ),
                         SizedBox(
-                          width: 15,
+                          width: 15.w,
                         ),
                         VerticalDivider(),
                         SizedBox(
-                          width: 15,
+                          width: 15.w,
                         ),
                         Column(
                           children: [
@@ -284,11 +285,11 @@ class _AccountState extends State<Account> {
                           ],
                         ),
                         SizedBox(
-                          width: 15,
+                          width: 15.w,
                         ),
                         VerticalDivider(),
                         SizedBox(
-                          width: 15,
+                          width: 15.w,
                         ),
                         Column(
                           children: [
@@ -306,11 +307,11 @@ class _AccountState extends State<Account> {
                           ],
                         ),
                         SizedBox(
-                          width: 10,
+                          width: 10.w,
                         ),
                         VerticalDivider(),
                         SizedBox(
-                          width: 10,
+                          width: 10.w,
                         ),
                         Column(
                           children: [
@@ -330,18 +331,18 @@ class _AccountState extends State<Account> {
                           ],
                         ),
                         SizedBox(
-                          width: 10,
+                          width: 10.w,
                         ),
                       ],
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: 25,
+                  height: 25.h,
                 ),
                 Divider(),
                 SizedBox(
-                  height: 25,
+                  height: 25.h,
                 ),
                 IntrinsicHeight(
                   child: Row(
@@ -353,11 +354,11 @@ class _AccountState extends State<Account> {
                             style: TextStyle(color: Colors.white, fontSize: 25),
                           )),
                       SizedBox(
-                        width: 40,
+                        width: 40.w,
                       ),
                       VerticalDivider(),
                       SizedBox(
-                        width: 20,
+                        width: 20.w,
                       ),
                       TextButton(
                           onPressed: () {},
@@ -369,11 +370,11 @@ class _AccountState extends State<Account> {
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 10.w,
                 ),
                 Divider(),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 IntrinsicHeight(
                   child: Row(
@@ -385,11 +386,11 @@ class _AccountState extends State<Account> {
                             style: TextStyle(color: Colors.white, fontSize: 25),
                           )),
                       SizedBox(
-                        width: 50,
+                        width: 50.w,
                       ),
                       VerticalDivider(),
                       SizedBox(
-                        width: 40,
+                        width: 40.w,
                       ),
                       TextButton(
                           onPressed: () {},
@@ -401,11 +402,11 @@ class _AccountState extends State<Account> {
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 Divider(),
                 SizedBox(
-                  height: 40,
+                  height: 40.h,
                 ),
                 Row(
                   children: [
@@ -425,7 +426,7 @@ class _AccountState extends State<Account> {
                       ],
                     ),
                     SizedBox(
-                      width: 80,
+                      width: 80.w,
                     ),
                     Column(
                       children: [
@@ -443,7 +444,7 @@ class _AccountState extends State<Account> {
                       ],
                     ),
                     SizedBox(
-                      width: 80,
+                      width: 80.w,
                     ),
                     Column(
                       children: [
@@ -463,7 +464,7 @@ class _AccountState extends State<Account> {
                                       ),
                                     ),
                                     SizedBox(
-                                      height: 25,
+                                      height: 25.h,
                                     ),
                                     Align(
                                         alignment: Alignment.center,
@@ -485,7 +486,7 @@ class _AccountState extends State<Account> {
                                                     color: Colors.black),
                                               )),
                                           SizedBox(
-                                            width: 50,
+                                            width: 50.w,
                                           ),
                                           ElevatedButton(
                                             style: ElevatedButton.styleFrom(
@@ -541,14 +542,14 @@ Future<dynamic> opendilog(
       backgroundColor: Colors.transparent,
       children: [
         SizedBox(
-          width: 1000,
-          height: 900,
+          width: 1000.w,
+          height: 900.h,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
               children: [
                 SizedBox(
-                  height: 30,
+                  height: 30.h,
                 ),
                 Text(
                   'Enter your name',
@@ -564,7 +565,7 @@ Future<dynamic> opendilog(
                   decoration: InputDecoration(),
                 ),
                 SizedBox(
-                  height: 600,
+                  height: 600.h,
                 ),
                 Row(
                   children: [
@@ -577,7 +578,7 @@ Future<dynamic> opendilog(
                           style: TextStyle(fontSize: 20, color: Colors.green),
                         )),
                     SizedBox(
-                      width: 150,
+                      width: 150.w,
                     ),
                     TextButton(
                         onPressed: () {

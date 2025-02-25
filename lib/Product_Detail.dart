@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProductDetail extends StatefulWidget {
@@ -81,8 +82,8 @@ class _ProductDetailState extends State<ProductDetail> {
       body: Column(
         children: [
           Container(
-            height: 300,
-            width: 450,
+            height: 300.h,
+            width: 450.w,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(30),
@@ -108,7 +109,7 @@ class _ProductDetailState extends State<ProductDetail> {
             ),
           ),
           SizedBox(
-            height: 20,
+            height: 20.h,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -155,7 +156,7 @@ class _ProductDetailState extends State<ProductDetail> {
                   ],
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 Row(
                   children: [
@@ -170,8 +171,8 @@ class _ProductDetailState extends State<ProductDetail> {
                           size: 30,
                         )),
                     Container(
-                      height: 40,
-                      width: 40,
+                      height: 40.h,
+                      width: 40.w,
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.grey),
                           borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -204,13 +205,13 @@ class _ProductDetailState extends State<ProductDetail> {
                   ],
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 Divider(
                   color: Colors.grey.shade300,
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 Row(
                   children: [
@@ -235,7 +236,7 @@ class _ProductDetailState extends State<ProductDetail> {
                   style: TextStyle(fontSize: 17),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 5.h,
                 ),
                 Divider(
                   color: Colors.grey.shade300,
@@ -250,8 +251,8 @@ class _ProductDetailState extends State<ProductDetail> {
                     Padding(
                       padding: const EdgeInsets.only(left: 210),
                       child: Container(
-                        height: 25,
-                        width: 40,
+                        height: 25.h,
+                        width: 40.w,
                         decoration: BoxDecoration(
                             color: Colors.grey.shade200,
                             borderRadius: BorderRadius.all(Radius.circular(5))),
@@ -270,7 +271,7 @@ class _ProductDetailState extends State<ProductDetail> {
                   ],
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 5.h,
                 ),
                 Divider(
                   color: Colors.grey.shade300,
@@ -312,11 +313,11 @@ class _ProductDetailState extends State<ProductDetail> {
                   ],
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 Container(
-                  height: 70,
-                  width: 350,
+                  height: 70.h,
+                  width: 350.w,
                   decoration: BoxDecoration(
                       color: Colors.green,
                       borderRadius: BorderRadius.all(Radius.circular(20))),

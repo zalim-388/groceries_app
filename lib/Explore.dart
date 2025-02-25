@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:groceries_app/Beverages.dart';
 
 class Explore extends StatefulWidget {
@@ -115,7 +116,7 @@ class _ExploreState extends State<Explore> {
               'Find Products',
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 20),
+             SizedBox(height: 20.h),
             TextField(
               controller: _controller,
               onChanged: _filterList,
@@ -170,8 +171,8 @@ class _ExploreState extends State<Explore> {
                           children: [
                             Image.asset(
                               product["image"] ?? '',
-                              height: 80,
-                              width: 80,
+                              height: 80.h,
+                              width: 80.w,
                             ),
                             const SizedBox(height: 10),
                             Text(
@@ -200,12 +201,12 @@ class _ExploreState extends State<Explore> {
                                       fontSize: 16,
                                     ),
                                   ),
-                                  const SizedBox(
-                                    width: 50,
+                                   SizedBox(
+                                    width: 50.w,
                                   ),
                                   Container(
-                                      height: 40,
-                                      width: 40,
+                                      height: 40.h,
+                                      width: 40.w,
                                       decoration: BoxDecoration(
                                           color: Colors.green,
                                           borderRadius:
@@ -258,10 +259,11 @@ class _ExploreState extends State<Explore> {
                           children: [
                             Image.asset(
                               product["image"] ?? '',
-                              height: 80,
-                              width: 80,
+                              height: 80.h,
+                              width: 80.w,
                             ),
-                            const SizedBox(height: 10),
+                            SizedBox(height: 10.h
+                            ),
                             Text(
                               product["name"] ?? '',
                               textAlign: TextAlign.center,
@@ -288,10 +290,9 @@ class _ExploreState extends State<Explore> {
                                       fontSize: 16,
                                     ),
                                   ),
-                                  const SizedBox(
-                                    width: 50,
+                                   SizedBox(
+                                    width: 50.w,
                                   ),
-                                
                                 ],
                               ),
                             )

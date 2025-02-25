@@ -43,7 +43,7 @@ class _VerificationState extends State<Verification> {
                               style: TextStyle(fontSize: 32),
                               textAlign: TextAlign.left,
                             ),
-                            SizedBox(height: 20),
+                            SizedBox(height: 20.h),
                             TextField(
                               decoration: InputDecoration(
                                   hintText: '- - - -',
@@ -71,7 +71,7 @@ class _VerificationState extends State<Verification> {
               child: Row(
                 children: [
                   SizedBox(
-                    width: 20,
+                    width: 20.w,
                   ),
                   TextButton(
                     onPressed: () {},

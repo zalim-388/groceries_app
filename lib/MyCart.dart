@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:groceries_app/order_accepted.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -193,7 +194,7 @@ class _MyCartState extends State<MyCart> {
                                         style: TextStyle(fontSize: 25),
                                       )),
                                   SizedBox(
-                                    width: 230,
+                                    width: 230.w,
                                   ),
                                   IconButton(
                                       onPressed: () {},
@@ -204,11 +205,11 @@ class _MyCartState extends State<MyCart> {
                                 ],
                               ),
                               SizedBox(
-                                height: 5,
+                                height: 5.h,
                               ),
                               Divider(),
                               SizedBox(
-                                height: 5,
+                                height: 5.h,
                               ),
                               Row(
                                 children: [
@@ -218,7 +219,7 @@ class _MyCartState extends State<MyCart> {
                                         color: Colors.grey, fontSize: 20),
                                   ),
                                   SizedBox(
-                                    width: 160,
+                                    width: 160.w,
                                   ),
                                   Text(
                                     'select method',
@@ -233,11 +234,11 @@ class _MyCartState extends State<MyCart> {
                                 ],
                               ),
                               SizedBox(
-                                height: 5,
+                                height: 5.h,
                               ),
                               Divider(),
                               SizedBox(
-                                height: 5,
+                                height: 5.h,
                               ),
                               Row(
                                 children: [
@@ -247,7 +248,7 @@ class _MyCartState extends State<MyCart> {
                                         fontSize: 20, color: Colors.grey),
                                   ),
                                   SizedBox(
-                                    width: 250,
+                                    width: 250.w,
                                   ),
                                   IconButton(
                                       onPressed: () {},
@@ -258,11 +259,11 @@ class _MyCartState extends State<MyCart> {
                                 ],
                               ),
                               SizedBox(
-                                height: 5,
+                                height: 5.h,
                               ),
                               Divider(),
                               SizedBox(
-                                height: 5,
+                                height: 5.h,
                               ),
                               Row(
                                 children: [
@@ -272,7 +273,7 @@ class _MyCartState extends State<MyCart> {
                                         fontSize: 20, color: Colors.grey),
                                   ),
                                   SizedBox(
-                                    width: 120,
+                                    width: 120.w,
                                   ),
                                   Text(
                                     'Pick discount ',
@@ -287,11 +288,11 @@ class _MyCartState extends State<MyCart> {
                                 ],
                               ),
                               SizedBox(
-                                height: 5,
+                                height: 5.h,
                               ),
                               Divider(),
                               SizedBox(
-                                height: 5,
+                                height: 5.h,
                               ),
                               Row(
                                 children: [
@@ -301,7 +302,7 @@ class _MyCartState extends State<MyCart> {
                                         fontSize: 20, color: Colors.grey),
                                   ),
                                   SizedBox(
-                                    width: 190,
+                                    width: 190.w,
                                   ),
                                   Text(
                                     '\$13.97',
@@ -316,11 +317,11 @@ class _MyCartState extends State<MyCart> {
                                 ],
                               ),
                               SizedBox(
-                                height: 5,
+                                height: 5.h,
                               ),
                               Divider(),
                               SizedBox(
-                                height: 5,
+                                height: 5.h,
                               ),
                               RichText(
                                 text: TextSpan(
@@ -348,14 +349,14 @@ class _MyCartState extends State<MyCart> {
                                     ]),
                               ),
                               SizedBox(
-                                height: 15,
+                                height: 15.h,
                               ),
                               GestureDetector(onTap: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => OrderAccepted(),));
                               },
                                 child: Container(
-                                  height: 70,
-                                  width: 300,
+                                  height: 70.h,
+                                  width: 300.w,
                                   decoration: BoxDecoration(
                                       color: Colors.green,
                                       borderRadius:

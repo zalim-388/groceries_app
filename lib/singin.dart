@@ -42,8 +42,8 @@ class _SinginState extends State<Singin> {
                         children: [
                           Image.asset(
                             'assets/image/Group ..png',
-                            height: 25,
-                            width: 25,
+                            height: 25.h,
+                            width: 25.w,
                           ),
                           Text(
                             'netcar',

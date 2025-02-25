@@ -83,10 +83,10 @@ class _NumberState extends State<Number> {
               child: Row(
                 children: [
                   SizedBox(
-                    width: 20,
+                    width: 20.w,
                   ),
                   SizedBox(
-                    width: 300,
+                    width: 300.w,
                   ),
                   FloatingActionButton(
                     onPressed: () {

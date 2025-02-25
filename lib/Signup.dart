@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:groceries_app/bottom_bar.dart';
 
 class signup extends StatefulWidget {
@@ -37,7 +38,7 @@ class _signupState extends State<signup> {
                     shape: BoxShape.rectangle),
               ),
               SizedBox(
-                height: 100,
+                height: 100.h,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +49,7 @@ class _signupState extends State<signup> {
                     textAlign: TextAlign.left,
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 15.h,
                   ),
                   Text(
                     'Enter your credentials to continue',
@@ -56,7 +57,7 @@ class _signupState extends State<signup> {
                     textAlign: TextAlign.left,
                   ),
                   SizedBox(
-                    height: 40,
+                    height: 40.h,
                   ),
                   TextField(
                     decoration: InputDecoration(
@@ -65,7 +66,7 @@ class _signupState extends State<signup> {
                             TextStyle(color: Colors.grey, fontSize: 17)),
                   ),
                   SizedBox(
-                    height: 40,
+                    height: 40.h,
                   ),
                   FormField<String>(
                       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -108,7 +109,7 @@ class _signupState extends State<signup> {
                         );
                       }),
                   SizedBox(
-                    height: 40,
+                    height: 40.h,
                   ),
                   TextField(
                     decoration: InputDecoration(
@@ -131,7 +132,7 @@ class _signupState extends State<signup> {
                     keyboardType: TextInputType.visiblePassword,
                     textInputAction: TextInputAction.done,
                   ),
-                  SizedBox(height: 15),
+                  SizedBox(height: 15.h),
                   RichText(
                     text: TextSpan(
                       text: 'By continuing you agree to our ',
@@ -153,7 +154,7 @@ class _signupState extends State<signup> {
                     ),
                   ),
                   SizedBox(
-                    height: 60,
+                    height: 60.h,
                   ),
                   GestureDetector(
                     onTap: () {
@@ -162,8 +163,8 @@ class _signupState extends State<signup> {
                             builder: (context) => MyHomePage(title: '')));
                     },
                     child: Container(
-                      height: 70,
-                      width: 370,
+                      height: 70.h,
+                      width: 370.w,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: Colors.green),
@@ -175,7 +176,7 @@ class _signupState extends State<signup> {
                     ),
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 15.h,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 70),

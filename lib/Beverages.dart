@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Beverages extends StatefulWidget {
   const Beverages({super.key});
@@ -146,9 +147,9 @@ class _BeveragesState extends State<Beverages> {
                                 ],
                               ),
                             ),
-                            SizedBox(height: 20),
+                            SizedBox(height: 20.h),
                             Container(
-                              height: MediaQuery.of(context).size.height * 0.75,
+                              height: MediaQuery.of(context).size.height * 0.75.h,
                               decoration: BoxDecoration(
                                 color: Colors.grey.shade200,
                                 borderRadius: BorderRadius.only(
@@ -169,7 +170,7 @@ class _BeveragesState extends State<Beverages> {
                                       style: TextStyle(fontSize: 25),
                                     ),
                                     ),
-                                    SizedBox(height: 20),
+                                    SizedBox(height: 20.h),
                                     Row(
                                       children: [
                                         Checkbox(
@@ -186,7 +187,7 @@ class _BeveragesState extends State<Beverages> {
                                             });
                                           },
                                         ),
-                                        SizedBox(width: 10),
+                                        SizedBox(width: 10.w),
                                         Text(
                                           'Eggs',
                                           style: TextStyle(fontSize: 16),
@@ -209,7 +210,7 @@ class _BeveragesState extends State<Beverages> {
                                             });
                                           },
                                         ),
-                                        SizedBox(width: 10),
+                                        SizedBox(width: 10.w),
                                         Text(
                                           'Noodles & Pasta',
                                           style: TextStyle(fontSize: 16),
@@ -227,7 +228,7 @@ class _BeveragesState extends State<Beverages> {
                                               });
                                             }),
                                         SizedBox(
-                                          width: 10,
+                                          width: 10.w,
                                         ),
                                         Text(
                                           'Chips & Crisps',
@@ -248,7 +249,7 @@ class _BeveragesState extends State<Beverages> {
                                               );
                                             }),
                                         SizedBox(
-                                          width: 10,
+                                          width: 10.w,
                                         ),
                                         Text(
                                           'Fast food',
@@ -257,7 +258,7 @@ class _BeveragesState extends State<Beverages> {
                                       ],
                                     ),
                                     SizedBox(
-                                      height: 20,
+                                      height: 20.h,
                                     ),
                                     Align(
                                       alignment: Alignment.centerLeft,
@@ -267,7 +268,7 @@ class _BeveragesState extends State<Beverages> {
                                       ),
                                     ),
                                     SizedBox(
-                                      height: 20,
+                                      height: 20.h,
                                     ),
                                     Row(
                                       children: [
@@ -281,7 +282,7 @@ class _BeveragesState extends State<Beverages> {
                                                 },
                                               );
                                             }),
-                                        SizedBox(width: 10),
+                                        SizedBox(width: 10.w),
                                         Text(
                                           'Individual Callection',
                                           style: TextStyle(fontSize: 16),
@@ -300,7 +301,7 @@ class _BeveragesState extends State<Beverages> {
                                                 },
                                               );
                                             }),
-                                        SizedBox(width: 10),
+                                        SizedBox(width: 10.w),
                                         Text(
                                           'Cocola',
                                           style: TextStyle(fontSize: 16),
@@ -319,7 +320,7 @@ class _BeveragesState extends State<Beverages> {
                                                 },
                                               );
                                             }),
-                                        SizedBox(width: 10),
+                                        SizedBox(width: 10.w),
                                         Text(
                                           'Ifad',
                                           style: TextStyle(fontSize: 16),
@@ -338,7 +339,7 @@ class _BeveragesState extends State<Beverages> {
                                                 },
                                               );
                                             }),
-                                        SizedBox(width: 10),
+                                        SizedBox(width: 10.w),
                                         Text(
                                           'Kazi Farmas',
                                           style: TextStyle(fontSize: 16),
@@ -405,8 +406,8 @@ class _BeveragesState extends State<Beverages> {
                     children: [
                       Image.asset(
                         beverage["image"]!,
-                        height: 80,
-                        width: 80,
+                        height: 80.h,
+                        width: 80.w,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 20),
@@ -424,7 +425,7 @@ class _BeveragesState extends State<Beverages> {
                                   TextStyle(color: Colors.grey, fontSize: 14),
                             ),
                             SizedBox(
-                              height: 20,
+                              height: 20.h,
                             ),
                             Row(
                               children: [
@@ -435,12 +436,12 @@ class _BeveragesState extends State<Beverages> {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
-                                  width: 60,
+                                  width: 60.w,
                                 ),
                                 GestureDetector(
                                   child: Container(
-                                    height: 40,
-                                    width: 40,
+                                    height: 40.h,
+                                    width: 40.w,
                                     decoration: BoxDecoration(
                                         color: Colors.green,
                                         borderRadius: BorderRadius.all(

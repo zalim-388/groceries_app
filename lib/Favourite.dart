@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -61,7 +62,7 @@ class _FavouriteState extends State<Favourite> {
               ),
             ),
             SizedBox(
-              height: 30,
+              height: 30.h,
             ),
             Divider(),
             Expanded(
@@ -80,7 +81,7 @@ class _FavouriteState extends State<Favourite> {
                             leading: Image.asset(
                               item["image"] ?? '',
                                  fit: BoxFit.cover,
-                              width: 60,
+                              width: 60.w,
                             
                             ),
                             title: Padding(
@@ -122,8 +123,8 @@ class _FavouriteState extends State<Favourite> {
                     ),
             ),
             Container(
-              height: 70,
-              width: 350,
+              height: 70.h,
+              width: 350.w,
               margin: EdgeInsets.all(10),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(

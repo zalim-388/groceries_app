@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OrderAccepted extends StatefulWidget {
   const OrderAccepted({super.key});
@@ -14,35 +15,35 @@ class _OrderAcceptedState extends State<OrderAccepted> {
       body: Column(
         children: [
           SizedBox(
-            height: 280,
+            height: 280.h,
           ),
           Center(
             child: Image.asset(
               'assets/image/Group 6872.png',
-              height: 180,
-              width: 180,
+              height: 180.h,
+              width: 180.w,
             ),
           ),
           SizedBox(
-            height: 25,
+            height: 25.h,
           ),
           Text(
             'Your Order has been\n         accepted',
             style: TextStyle(fontSize: 30),
           ),
           SizedBox(
-            height: 15,
+            height: 15.h,
           ),
           Text(
             'Your items has been placcd and is on\n         it’s way to being processed',
             style: TextStyle(color: Colors.grey, fontSize: 15),
           ),
           SizedBox(
-            height: 100,
+            height: 100.h,
           ),
           Container(
-            height: 70,
-            width: 300,
+            height: 70.h,
+            width: 300.w,
             decoration: BoxDecoration(
                 color: Colors.green,
                 borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -74,8 +75,8 @@ class _OrderAcceptedState extends State<OrderAccepted> {
                               Center(
                                 child: Image.asset(
                                   'assets/image/image 13.png',
-                                  height: 100,
-                                  width: 100,
+                                  height: 100.h,
+                                  width: 100.w,
                                 ),
                               ),
                               Text(
@@ -83,7 +84,7 @@ class _OrderAcceptedState extends State<OrderAccepted> {
                                 style: TextStyle(fontSize: 20),
                               ),
                               SizedBox(
-                                height: 10,
+                                height: 10.h,
                               ),
                               Text(
                                 'Something went tembly wrong.',
@@ -91,8 +92,8 @@ class _OrderAcceptedState extends State<OrderAccepted> {
                                     TextStyle(color: Colors.grey, fontSize: 15),
                               ),
                               Container(
-                                height: 70,
-                                width: 300,
+                                height: 70.h,
+                                width: 300.w,
                                 decoration: BoxDecoration(
                                     color: Colors.green,
                                     borderRadius:

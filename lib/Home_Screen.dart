@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:groceries_app/Product_Detail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -126,8 +127,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 Padding(
                   padding: const EdgeInsets.only(left: 150),
                   child: Container(
-                    height: 50,
-                    width: 50,
+                    height: 50.h,
+                    width: 50.w,
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             image: AssetImage('assets/image/Group ..png'),
@@ -140,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Row(
                     children: [
                       Icon(Icons.location_on, color: Colors.grey),
-                      SizedBox(width: 8),
+                      SizedBox(width: 8.w),
                       Text(
                         'Dhaka, Banassre',
                         style: TextStyle(fontSize: 16, color: Colors.grey),
@@ -148,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: 16.h),
                 TextField(
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.search),
@@ -161,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     fillColor: Colors.grey.shade200,
                   ),
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: 16.h),
                 CarouselSlider(
                   items: imageSliders,
                   options: CarouselOptions(
@@ -170,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     aspectRatio: 2.0,
                   ),
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: 16.h),
                 Text(
                   'Exclusive Offers',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -178,7 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 15),
                   child: SizedBox(
-                    height: 200,
+                    height: 200.h,
                     child: Expanded(
                       child: ListView.builder(
                           scrollDirection: Axis.horizontal,
@@ -208,14 +209,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                       border: Border.all(color: Colors.grey),
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(20))),
-                                  height: 40,
-                                  width: 150,
+                                  height: 40.h,
+                                  width: 150.w,
                                   child: Column(
                                     children: [
                                       Image.asset(
                                         fruit["image"]!,
-                                        height: 80,
-                                        width: 80,
+                                        height: 80.h,
+                                        width: 80.w,
                                       ),
                                       Padding(
                                         padding:
@@ -238,7 +239,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                       ),
                                       SizedBox(
-                                        height: 20,
+                                        height: 20.h,
                                       ),
                                       Padding(
                                         padding:
@@ -249,11 +250,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                               fruit["price"]!,
                                             ),
                                             SizedBox(
-                                              width: 30,
+                                              width: 30.w,
                                             ),
                                             Container(
-                                              height: 40,
-                                              width: 40,
+                                              height: 40.h,
+                                              width: 40.w,
                                               decoration: BoxDecoration(
                                                   color: Colors.green,
                                                   borderRadius:
@@ -331,8 +332,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     children: [
                                       Image.asset(
                                         veg["image"]!,
-                                        height: 80,
-                                        width: 80,
+                                        height: 80.h,
+                                        width: 80.w,
                                       ),
                                       Padding(
                                         padding:
@@ -355,7 +356,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                       ),
                                       SizedBox(
-                                        height: 20,
+                                        height: 20.h,
                                       ),
                                       Padding(
                                         padding:
@@ -366,11 +367,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                             style: TextStyle(fontSize: 20),
                                           ),
                                           SizedBox(
-                                            width: 30,
+                                            width: 30.w,
                                           ),
                                           Container(
-                                            height: 40,
-                                            width: 40,
+                                            height: 40.h,
+                                            width: 40.w,
                                             decoration: BoxDecoration(
                                                 color: Colors.green,
                                                 borderRadius: BorderRadius.all(

@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
               height: 50.h,
               width: 60.w,
             ),
-            const SizedBox(width:3),
+             SizedBox(width:3.w),
             Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
