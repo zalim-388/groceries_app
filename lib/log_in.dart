@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:groceries_app/Singup.dart';
 
 class LogIn extends StatefulWidget {
@@ -27,8 +28,8 @@ class _LogInState extends State<LogIn> {
             child: Column(
               children: [
                 Container(
-                  height: 80,
-                  width: 80,
+                  height: 80.h,
+                  width: 80.w,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage('assets/image/Group ..png'),
@@ -36,7 +37,7 @@ class _LogInState extends State<LogIn> {
                       shape: BoxShape.rectangle),
                 ),
                 SizedBox(
-                  height: 130,
+                  height: 130.h,
                 ),
                 Align(
                   alignment: Alignment.centerLeft,
@@ -46,7 +47,7 @@ class _LogInState extends State<LogIn> {
                   ),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 15.h,
                 ),
                 Align(
                   alignment: Alignment.centerLeft,
@@ -56,7 +57,7 @@ class _LogInState extends State<LogIn> {
                   ),
                 ),
                 SizedBox(
-                  height: 40,
+                  height: 40.h,
                 ),
                 TextField(
                   decoration: InputDecoration(
@@ -64,7 +65,7 @@ class _LogInState extends State<LogIn> {
                       labelStyle: TextStyle(color: Colors.grey, fontSize: 25)),
                 ),
                 SizedBox(
-                  height: 40,
+                  height: 40.h,
                 ),
                 TextField(
                   obscureText: passwordVisible,
@@ -89,7 +90,7 @@ class _LogInState extends State<LogIn> {
                   textInputAction: TextInputAction.done,
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 15.h,
                 ),
                 Align(
                   alignment: Alignment.centerRight,
@@ -101,11 +102,11 @@ class _LogInState extends State<LogIn> {
                       )),
                 ),
                 SizedBox(
-                  height: 40,
+                  height: 40.h,
                 ),
                 Container(
-                  height: 70,
-                  width: 300,
+                  height: 70.h,
+                  width: 300.w,
                   decoration: BoxDecoration(
                       color: Colors.green,
                       borderRadius: BorderRadius.circular(15)),

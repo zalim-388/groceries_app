@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:groceries_app/Verification.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
@@ -46,7 +47,7 @@ class _NumberState extends State<Number> {
                                     fontSize: 30, fontWeight: FontWeight.w500),
                               ),
                             ),
-                            SizedBox(height: 20),
+                            SizedBox(height: 20.h),
                             Container(
                                 child: Column(children: [
                               IntlPhoneField(

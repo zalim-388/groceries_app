@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:groceries_app/splash_Screen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() => runApp(MyApp());
 
@@ -7,13 +8,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var darkTheme = ThemeData.dark().copyWith(primaryColor: Colors.blue);
-
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: SplashScreen(),
-      ),
-    );
+    return ScreenUtilInit(
+        designSize: Size(414.w, 896.h),
+        splitScreenMode: true,
+        minTextAdapt: true,
+        builder: (context, child) => MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: Scaffold(
+                body: SplashScreen(),
+              ),
+            ));
   }
 }
 

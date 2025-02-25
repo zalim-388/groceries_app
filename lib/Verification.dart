@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:groceries_app/select_location.dart';
 
 class Verification extends StatefulWidget {
@@ -52,7 +53,7 @@ class _VerificationState extends State<Verification> {
                                       fontSize: 30, color: Colors.grey)),
                               keyboardType: TextInputType.number,
                             ),
-                            SizedBox(height: 350),
+                            SizedBox(height: 350.h),
                           ],
                         ),
                       ),
@@ -80,7 +81,7 @@ class _VerificationState extends State<Verification> {
                     ),
                   ),
                   SizedBox(
-                    width: 215,
+                    width: 215.w,
                   ),
                   FloatingActionButton(
                     onPressed: () {

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:groceries_app/onbording.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -35,8 +36,8 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Image.asset(
               'image/Group.png',
-              height: 50,
-              width: 60,
+              height: 50.h,
+              width: 60.w,
             ),
             const SizedBox(width:3),
             Column(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:groceries_app/log_in.dart';
 
 class SelectLocation extends StatefulWidget {
@@ -30,8 +31,8 @@ class _SelectLocationState extends State<SelectLocation> {
             child: Column(
               children: [
                 Container(
-                  height: 250,
-                  width: 250,
+                  height: 250.h,
+                  width: 250.w,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage('assets/image/illustration.png'),
@@ -43,14 +44,14 @@ class _SelectLocationState extends State<SelectLocation> {
                   style: TextStyle(fontSize: 30),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 15.h,
                 ),
                 Text(
                   'swicth on you loction  to stay in tune with\n         what’s happening in your area',
                   style: TextStyle(color: Colors.grey, fontSize: 16),
                 ),
                 SizedBox(
-                  height: 80,
+                  height: 80.h,
                 ),
                 TextField(
                   decoration: InputDecoration(
@@ -66,7 +67,7 @@ class _SelectLocationState extends State<SelectLocation> {
                           ))),
                 ),
                 SizedBox(
-                  height: 40,
+                  height: 40.h,
                 ),
                 TextField(
                   decoration: InputDecoration(
@@ -85,7 +86,7 @@ class _SelectLocationState extends State<SelectLocation> {
                           ))),
                 ),
                 SizedBox(
-                  height: 70,
+                  height: 70.h,
                 ),
                 GestureDetector(
                   onTap: () {
@@ -96,8 +97,8 @@ class _SelectLocationState extends State<SelectLocation> {
                         ));
                   },
                   child: Container(
-                    height: 70,
-                    width: 300,
+                    height: 70.h,
+                    width: 300.w,
                     decoration: BoxDecoration(
                         color: Colors.green,
                         borderRadius: BorderRadius.circular(15)),

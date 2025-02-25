@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class singup extends StatefulWidget {
   const singup({super.key});
@@ -27,8 +28,8 @@ class _singupState extends State<singup> {
           child: Column(
             children: [
               Container(
-                height: 80,
-                width: 80,
+                height: 80.h,
+                width: 80.w,
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage('assets/image/Group ..png'),
@@ -36,7 +37,7 @@ class _singupState extends State<singup> {
                     shape: BoxShape.rectangle),
               ),
               SizedBox(
-                height: 70,
+                height: 70.h,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +48,7 @@ class _singupState extends State<singup> {
                     textAlign: TextAlign.left,
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 15.h,
                   ),
                   Text(
                     'Enter your credentials to continue',
@@ -55,7 +56,7 @@ class _singupState extends State<singup> {
                     textAlign: TextAlign.left,
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 30.h,
                   ),
                   TextField(
                     decoration: InputDecoration(
@@ -64,7 +65,7 @@ class _singupState extends State<singup> {
                             TextStyle(color: Colors.grey, fontSize: 17)),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 30.h,
                   ),
                   FormField<String>(
                       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -130,7 +131,7 @@ class _singupState extends State<singup> {
                     keyboardType: TextInputType.visiblePassword,
                     textInputAction: TextInputAction.done,
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 10.h),
                   RichText(
                     text: TextSpan(
                       text: 'By continuing you agree to our ',
@@ -152,10 +153,10 @@ class _singupState extends State<singup> {
                     ),
                   ),
                   SizedBox(
-                    height: 40,
+                    height: 40.h,
                   ),
                   Container(
-                    height: 60,
+                    height: 60.h,
                     width: double.infinity,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
@@ -167,7 +168,7 @@ class _singupState extends State<singup> {
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 20.h,
                   ),
                   RichText(
                     text: TextSpan(

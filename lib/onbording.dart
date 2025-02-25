@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:groceries_app/singin.dart';
 
 class Onbording extends StatefulWidget {
@@ -13,8 +14,8 @@ class _OnbordingState extends State<Onbording> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: 959,
-        width: 450,
+        height: 959.h,
+        width: 450.w,
         decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage('image/8140 1.png'), fit: BoxFit.cover)),
@@ -25,8 +26,8 @@ class _OnbordingState extends State<Onbording> {
               children: [
                 Image.asset(
                   'image/Group.png',
-                  height: 60,
-                  width: 60,
+                  height: 60.h,
+                  width: 60.w,
                 ),
                 Text(
                   '  Welcome\nto our store',
@@ -40,7 +41,7 @@ class _OnbordingState extends State<Onbording> {
                   style: TextStyle(color: Colors.grey.shade300),
                 ),
                 SizedBox(
-                  height: 40,
+                  height: 40.h,
                 ),
                 GestureDetector(
                   onTap: () {
@@ -51,8 +52,8 @@ class _OnbordingState extends State<Onbording> {
                         ));
                   },
                   child: Container(
-                    height: 60,
-                    width: 300,
+                    height: 60.h,
+                    width: 300.w,
                     decoration: BoxDecoration(
                         color: Colors.green,
                         borderRadius: BorderRadius.circular(15)),

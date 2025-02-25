@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:groceries_app/number.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
@@ -26,8 +27,8 @@ class _SinginState extends State<Singin> {
             children: [
               Stack(children: [
                 Container(
-                  height: 350,
-                  width: 480,
+                  height: 350.h,
+                  width: 480.w,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage('assets/image/Mask Group.png'))),
@@ -53,7 +54,7 @@ class _SinginState extends State<Singin> {
                 ),
               ]),
               SizedBox(
-                height: 100,
+                height: 100.h,
               ),
               Align(
                 alignment: Alignment.centerLeft,
@@ -63,64 +64,62 @@ class _SinginState extends State<Singin> {
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 20.h,
               ),
               Container(
-                  child: IntlPhoneField(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Number(),
-                      ));
-                },
-                decoration: InputDecoration(
-
-               
-                  border: InputBorder.none,
-                ),
-                initialCountryCode: 'IN',
-                onChanged: (phone) {
-                  print(phone.completeNumber);
-                },
-              ),
-                  // child: GestureDetector(onTap: () {
-                  //   Navigator.push(context, MaterialPageRoute(builder: (context) => Number(),));
-                  // },
-                  // child: InternationalPhoneNumberInput(
-                  //   onInputChanged: (PhoneNumber number) {
-                  //     print(number.phoneNumber);
-                  //   },
-                  //   onInputValidated: (bool value) {
-                  //     print(value);
-                  //   },
-                  //   selectorConfig: SelectorConfig(
-                  //     selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                  //     useBottomSheetSafeArea: true,
-                  //   ),
-                  //   ignoreBlank: false,
-                  //   autoValidateMode: AutovalidateMode.disabled,
-                  //   selectorTextStyle: TextStyle(color: Colors.black),
-                  //   initialValue: number,
-                  //   textFieldController: controller,
-                  //   formatInput: false,
-                  //   keyboardType: TextInputType.numberWithOptions(
-                  //       signed: true, decimal: true),
-                  //   onSaved: (PhoneNumber number) {
-                  //     print('On Saved: $number');
-                  //   },
-                  //    onFieldSubmitted: (value) {
-                  //               // Navigate to the next page when user submits the input
-                  //               Navigator.push(
-                  //                 context,
-                  //                 MaterialPageRoute(builder: (context) => Number()),
-                  //               );
-                  //             },
-              
-                  // ),
+                child: IntlPhoneField(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Number(),
+                        ));
+                  },
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
                   ),
+                  initialCountryCode: 'IN',
+                  onChanged: (phone) {
+                    print(phone.completeNumber);
+                  },
+                ),
+                // child: GestureDetector(onTap: () {
+                //   Navigator.push(context, MaterialPageRoute(builder: (context) => Number(),));
+                // },
+                // child: InternationalPhoneNumberInput(
+                //   onInputChanged: (PhoneNumber number) {
+                //     print(number.phoneNumber);
+                //   },
+                //   onInputValidated: (bool value) {
+                //     print(value);
+                //   },
+                //   selectorConfig: SelectorConfig(
+                //     selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+                //     useBottomSheetSafeArea: true,
+                //   ),
+                //   ignoreBlank: false,
+                //   autoValidateMode: AutovalidateMode.disabled,
+                //   selectorTextStyle: TextStyle(color: Colors.black),
+                //   initialValue: number,
+                //   textFieldController: controller,
+                //   formatInput: false,
+                //   keyboardType: TextInputType.numberWithOptions(
+                //       signed: true, decimal: true),
+                //   onSaved: (PhoneNumber number) {
+                //     print('On Saved: $number');
+                //   },
+                //    onFieldSubmitted: (value) {
+                //               // Navigate to the next page when user submits the input
+                //               Navigator.push(
+                //                 context,
+                //                 MaterialPageRoute(builder: (context) => Number()),
+                //               );
+                //             },
+
+                // ),
+              ),
               SizedBox(
-                height: 20,
+                height: 20.h,
               ),
               TextButton(
                 onPressed: () {},
@@ -133,11 +132,11 @@ class _SinginState extends State<Singin> {
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 20.h,
               ),
               Container(
-                height: 70,
-                width: 300,
+                height: 70.h,
+                width: 300.w,
                 decoration: BoxDecoration(
                     color: Colors.blue,
                     borderRadius: BorderRadius.circular(15)),
@@ -145,7 +144,7 @@ class _SinginState extends State<Singin> {
                 child: Row(
                   children: [
                     SizedBox(
-                      width: 30,
+                      width: 30.w,
                     ),
                     Text(
                       'G',
@@ -155,7 +154,7 @@ class _SinginState extends State<Singin> {
                           fontWeight: FontWeight.w700),
                     ),
                     SizedBox(
-                      width: 40,
+                      width: 40.w,
                     ),
                     Text(
                       'Continue with Google',
@@ -165,11 +164,11 @@ class _SinginState extends State<Singin> {
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 20.h,
               ),
               Container(
-                height: 70,
-                width: 300,
+                height: 70.h,
+                width: 300.w,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     color: const Color.fromARGB(255, 74, 102, 172)),
@@ -177,7 +176,7 @@ class _SinginState extends State<Singin> {
                 child: Row(
                   children: [
                     SizedBox(
-                      width: 30,
+                      width: 30.w,
                     ),
                     Text(
                       'f',
@@ -187,7 +186,7 @@ class _SinginState extends State<Singin> {
                           fontWeight: FontWeight.w700),
                     ),
                     SizedBox(
-                      width: 40,
+                      width: 40.w,
                     ),
                     Text(
                       'Continue with Facebook',
