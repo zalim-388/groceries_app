@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:groceries_app/Singup.dart';
 
 class LogIn extends StatefulWidget {
@@ -16,6 +15,13 @@ class _LogInState extends State<LogIn> {
   void initState() {
     super.initState();
     passwordVisible = true;
+    saveCartProduct();
+  }
+
+  Future<void> saveCartProduct() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    prefs.clear();
   }
 
   Widget build(BuildContext context) {
@@ -117,7 +123,7 @@ class _LogInState extends State<LogIn> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 100),
+                  padding: const EdgeInsets.only(left: 80),
                   child: Row(
                     children: [
                       Text(
@@ -129,7 +135,7 @@ class _LogInState extends State<LogIn> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => singup()));
+                                    builder: (context) => signup()));
                           },
                           child: Text(
                             'Singup',

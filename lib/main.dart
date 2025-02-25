@@ -1,88 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:groceries_app/provider.dart';
 import 'package:groceries_app/splash_Screen.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
+  Size size;
+  double height;
+  double width;
+
+  MyApp({super.key})
+      : size = Size.zero,
+        height = 0.0,
+        width = 0.0;
+
   @override
   Widget build(BuildContext context) {
     var darkTheme = ThemeData.dark().copyWith(primaryColor: Colors.blue);
-    return ScreenUtilInit(
-        designSize: Size(414.w, 896.h),
-        splitScreenMode: true,
-        minTextAdapt: true,
-        builder: (context, child) => MaterialApp(
-              debugShowCheckedModeBanner: false,
-              home: Scaffold(
-                body: SplashScreen(),
-              ),
-            ));
+
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: SplashScreen(),
+      ),
+    );
   }
 }
-
-// class MyHomePage extends StatefulWidget {
-//   @override
-//   _MyHomePageState createState() => _MyHomePageState();
-// }
-
-// class _MyHomePageState extends State<MyHomePage> {
-//   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-//   final TextEditingController controller = TextEditingController();
-//   String initialCountry = 'NG';
-//   PhoneNumber number = PhoneNumber(isoCode: 'NG');
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Form(
-//       key: formKey,
-//       child: Container(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: <Widget>[
-//             InternationalPhoneNumberInput(
-//               onInputChanged: (PhoneNumber number) {
-//                 print(number.phoneNumber);
-//               },
-//               onInputValidated: (bool value) {
-//                 print(value);
-//               },
-//               selectorConfig: SelectorConfig(
-//                 selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-//                 useBottomSheetSafeArea: true,
-//               ),
-//               ignoreBlank: false,
-//               autoValidateMode: AutovalidateMode.disabled,
-//               selectorTextStyle: TextStyle(color: Colors.black),
-//               initialValue: number,
-//               textFieldController: controller,
-//               formatInput: true,
-//               keyboardType:
-//                   TextInputType.numberWithOptions(signed: true, decimal: true),
-//               inputBorder: OutlineInputBorder(),
-//               onSaved: (PhoneNumber number) {
-//                 print('On Saved: $number');
-//               },
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-
-//   void getPhoneNumber(String phoneNumber) async {
-//     PhoneNumber number =
-//         await PhoneNumber.getRegionInfoFromPhoneNumber(phoneNumber, 'US');
-
-//     setState(() {
-//       this.number = number;
-//     });
-//   }
-
-//   @override
-//   void dispose() {
-//     controller.dispose();
-//     super.dispose();
-//   }
-// }
