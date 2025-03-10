@@ -1,4 +1,5 @@
-🚀 Groceries App - A Flutter-Based Shopping Experience! 🛒
+🚀 Groceries App 
+A Flutter-Based Shopping Experience! 🛒
 
 Excited to showcase my latest Flutter project – Groceries App! Built with Provider for state management, it features:
 
